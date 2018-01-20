@@ -1,0 +1,287 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[      8275,        277]
+NotebookOptionsPosition[      5916,        205]
+NotebookOutlinePosition[      7034,        235]
+CellTagsIndexPosition[      6991,        232]
+WindowTitle->Error Bar Log Plotting Package - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "GuideColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["Mathematica",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:ErrorBarLogPlots/guide/ErrorBarLogPlots"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[CellGroupData[{
+
+Cell["Error Bar Log Plotting Package", "GuideTitle",
+ CellID->942062912],
+
+Cell["\[NonBreakingSpace]", "GuideAbstract",
+ CellID->1],
+
+Cell[TextData[{
+ "Defines functions to plot numerical data with associated error bars using \
+any combination of linear and log scales. This package extends the \
+functionality of the basic ",
+ ButtonBox["ErrorBar Plotting Package",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarPlots/guide/ErrorBarPlottingPackage"],
+ " and its function ",
+ Cell[TextData[StyleBox[ButtonBox["ErrorListPlot",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarPlots/ref/ErrorListPlot"], "InlineCode"]], 
+  "InlineFunctionSans"],
+ ". \nAlong with the additional log-scale plotting functions this package \
+provides an enhanced definition of ",
+ Cell[TextData[StyleBox[ButtonBox["ErrorListPlot",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarPlots/ref/ErrorListPlot"], "InlineCode"]], 
+  "InlineFunctionSans"],
+ " which improves how plot symbols and error bars are combined in a plot \
+graphic."
+}], "GuideText",
+ CellID->580570881],
+
+Cell[CellGroupData[{
+
+Cell["Plotting functions", "GuideFunctionsSubsection",
+ CellID->13604447],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ErrorListPlot",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarPlots/ref/ErrorListPlot"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " plot data with error bars (from ",
+ ButtonBox["ErrorBarPlotting Package",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarPlots/guide/ErrorBarPlottingPackage"],
+ ")"
+}], "GuideText",
+ CellID->97206831],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ErrorListLogPlot",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarLogPlots/ref/ErrorListLogPlot"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " log y, linear x plot of data with error bars"
+}], "GuideText",
+ CellID->547433888],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ErrorListLogLinearPlot",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarLogPlots/ref/ErrorListLogLinearPlot"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " linear y, log x plot of data with error bars"
+}], "GuideText",
+ CellID->747878047],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ErrorListLogLogPlot",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarLogPlots/ref/ErrorListLogLogPlot"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " log-log plot of data with error bars"
+}], "GuideText",
+ CellID->13126008],
+
+Cell["\t", "GuideDelimiterSubsection",
+ CellID->311258892]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Options", "GuideFunctionsSubsection",
+ CellID->223932303],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ErrorBarStyle",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarLogPlots/ref/ErrorBarStyle"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ErrorBarMapping",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarLogPlots/ref/ErrorBarMapping"]], 
+  "InlineFunctionSans"],
+ "\[NonBreakingSpace]",
+ StyleBox["\[MediumSpace]\[FilledVerySmallSquare]\[MediumSpace]", 
+  "InlineSeparator"],
+ " ",
+ Cell[TextData[ButtonBox["ErrorBarFunction",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarPlots/ref/ErrorBarFunction"]], 
+  "InlineFunctionSans"]
+}], "InlineGuideFunctionListing",
+ CellID->58033752],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["ErrorBarScale",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarLogPlots/ref/ErrorBarScale"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " use as an option value of ",
+ StyleBox[ButtonBox["ErrorBarFunction",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarPlots/ref/ErrorBarFunction"], "InlineCode"],
+ " to scale error bar lengths"
+}], "GuideText",
+ CellID->10078699],
+
+Cell[TextData[{
+ Cell[TextData[ButtonBox["$ErrorBarStyle",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarLogPlots/ref/$ErrorBarStyle"]], 
+  "InlineFunctionSans"],
+ " ",
+ StyleBox["\[LongDash]", "GuideEmDash"],
+ " default style for error bars if option ",
+ Cell[TextData[ButtonBox["ErrorBarStyle",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarLogPlots/ref/ErrorBarStyle"]], 
+  "InlineFunctionSans"],
+ " is not specified"
+}], "GuideText",
+ CellID->33239654]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["MORE ABOUT", "GuideMoreAboutSection",
+ CellID->23220180],
+
+Cell[TextData[ButtonBox["ErrorBar Plotting Package",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:ErrorBarPlots/guide/ErrorBarPlottingPackage"]], "GuideMoreAbout",
+ CellID->1567025153],
+
+Cell[TextData[ButtonBox["Data Visualization",
+ BaseStyle->"Link",
+ ButtonData->"paclet:guide/DataVisualization"]], "GuideMoreAbout",
+ CellID->252299663],
+
+Cell[TextData[ButtonBox["Numerical Data",
+ BaseStyle->"Link",
+ ButtonData->"paclet:guide/NumericalData"]], "GuideMoreAbout",
+ CellID->119821918]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"Error Bar Log Plotting Package - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2015, 12, 25, 8, 16, 32.8269534}", "context" -> 
+    "ErrorBarLogPlots`", "keywords" -> {"graphics plotting"}, "index" -> True,
+     "label" -> "Error Bar Log Plots Package Guide", "language" -> "en", 
+    "paclet" -> "ErrorBarLogPlots Package", "status" -> "None", "summary" -> 
+    " ", "synonyms" -> {}, "title" -> "Error Bar Log Plotting Package", 
+    "type" -> "Guide", "uri" -> 
+    "ErrorBarLogPlots/guide/ErrorBarLogPlotsPackage"}, "LinkTrails" -> "", 
+  "SearchTextTranslated" -> ""},
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (December 4, 2014)",
+StyleDefinitions->FrontEnd`FileName[{"Wolfram"}, "Reference.nb", 
+  CharacterEncoding -> "WindowsANSI"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[624, 21, 75, 1, 70, "GuideColorBar"],
+Cell[702, 24, 198, 5, 70, "LinkTrail"],
+Cell[CellGroupData[{
+Cell[925, 33, 72, 1, 70, "GuideTitle",
+ CellID->942062912],
+Cell[1000, 36, 56, 1, 70, "GuideAbstract",
+ CellID->1],
+Cell[1059, 39, 923, 21, 70, "GuideText",
+ CellID->580570881],
+Cell[CellGroupData[{
+Cell[2007, 64, 73, 1, 70, "GuideFunctionsSubsection",
+ CellID->13604447],
+Cell[2083, 67, 417, 13, 70, "GuideText",
+ CellID->97206831],
+Cell[2503, 82, 304, 9, 70, "GuideText",
+ CellID->547433888],
+Cell[2810, 93, 316, 9, 70, "GuideText",
+ CellID->747878047],
+Cell[3129, 104, 301, 9, 70, "GuideText",
+ CellID->13126008],
+Cell[3433, 115, 58, 1, 70, "GuideDelimiterSubsection",
+ CellID->311258892]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3528, 121, 63, 1, 70, "GuideFunctionsSubsection",
+ CellID->223932303],
+Cell[3594, 124, 762, 22, 70, "InlineGuideFunctionListing",
+ CellID->58033752],
+Cell[4359, 148, 447, 13, 70, "GuideText",
+ CellID->10078699],
+Cell[4809, 163, 466, 14, 70, "GuideText",
+ CellID->33239654]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5324, 183, 62, 1, 70, "GuideMoreAboutSection",
+ CellID->23220180],
+Cell[5389, 186, 183, 4, 70, "GuideMoreAbout",
+ CellID->1567025153],
+Cell[5575, 192, 152, 3, 70, "GuideMoreAbout",
+ CellID->252299663],
+Cell[5730, 197, 144, 3, 70, "GuideMoreAbout",
+ CellID->119821918]
+}, Open  ]],
+Cell[5889, 203, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+

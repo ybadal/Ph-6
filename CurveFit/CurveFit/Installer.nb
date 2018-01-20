@@ -1,0 +1,727 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 6.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     29322,        718]
+NotebookOptionsPosition[     27172,        641]
+NotebookOutlinePosition[     27742,        663]
+CellTagsIndexPosition[     27699,        660]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Install the CurveFit package for Mathematica", "Subtitle",
+ CellChangeTimes->{{3.4097007193963747`*^9, 3.4097007442401247`*^9}, {
+  3.5346000762797318`*^9, 3.5346000806759834`*^9}}],
+
+Cell[TextData[{
+ "Version 1.95 / ErrorBarLogPlots version 3.0\nJan 2016, California Institute \
+of Technology, Pasadena, CA\nInstalls the \[OpenCurlyDoubleQuote]legacy \
+package\[CloseCurlyDoubleQuote] if the ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " version is less than 10.0"
+}], "Subsubtitle",
+ CellChangeTimes->{{3.6610026873287663`*^9, 3.661002722218815*^9}, {
+  3.6610027826288996`*^9, 3.661002839028979*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["Installer function definitions", "Subsection",
+ InitializationCell->True,
+ CellChangeTimes->{{3.389030985563875*^9, 3.389030993267*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["directories", "Subsubsection",
+ CellChangeTimes->{{3.408990097828125*^9, 3.40899010015625*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"allusersdir", " ", "=", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{"$BaseDirectory", ",", "\"\<Applications\>\""}], "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"oneuserdir", " ", "=", " ", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{"$UserBaseDirectory", ",", "\"\<Applications\>\""}], "}"}], 
+    "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"docsdir", " ", "=", " ", "$UserDocumentsDirectory"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"curvefitdir", " ", "=", " ", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{"docsdir", ",", "\"\<CurveFit\>\""}], "}"}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"thisdir", " ", "=", " ", 
+   RowBox[{"NotebookDirectory", "[", "]"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"packagedir", " ", "=", " ", 
+   RowBox[{"FileNameJoin", "[", 
+    RowBox[{"{", 
+     RowBox[{"thisdir", ",", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{"$VersionNumber", " ", "<", " ", "10.0"}], ",", " ", 
+        "\"\<legacy_package\>\"", ",", " ", "\"\<package\>\""}], "]"}]}], 
+     "}"}], "]"}]}], ";"}], "\[IndentingNewLine]"}], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.389026818532625*^9, 3.38902688236075*^9}, {
+   3.38902692686075*^9, 3.389027012501375*^9}, {3.389027049938875*^9, 
+   3.38902711679825*^9}, {3.38902858929825*^9, 3.38902859717325*^9}, {
+   3.389028632782625*^9, 3.3890286670795*^9}, {3.389028709313875*^9, 
+   3.389028717345125*^9}, 3.389028873345125*^9, {3.389028984876375*^9, 
+   3.389029042313875*^9}, {3.408897499226203*^9, 3.408897514023078*^9}, {
+   3.408898132898078*^9, 3.408898133710578*^9}, {3.408898265929328*^9, 
+   3.408898294960578*^9}, {3.408898423679328*^9, 3.408898427835578*^9}, {
+   3.408898476929328*^9, 3.408898514007453*^9}, {3.408912264194953*^9, 
+   3.408912337585578*^9}, {3.408912448491828*^9, 3.408912475679328*^9}, {
+   3.408913296632453*^9, 3.408913365241828*^9}, 3.408913485257453*^9, {
+   3.408914368538703*^9, 3.408914403023078*^9}, {3.4089947615625*^9, 
+   3.408994782609375*^9}, 3.408994819015625*^9, {3.408995191109375*^9, 
+   3.408995200609375*^9}, 3.40899523740625*^9, {3.408995421234375*^9, 
+   3.408995487671875*^9}, {3.415468204163375*^9, 3.4154682263665*^9}, {
+   3.5457462367055655`*^9, 3.545746243397977*^9}, {3.545746289542858*^9, 
+   3.545746315017703*^9}, {3.6610025637685933`*^9, 3.6610026071186543`*^9}, {
+   3.661009558743677*^9, 3.661009559663678*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["message box with beep that requires an OK press to continue", \
+"Subsubsection",
+ CellChangeTimes->{{3.408990097828125*^9, 3.40899010015625*^9}, {
+  3.40899051096875*^9, 3.408990531125*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"alertdialog", "[", "s_String", "]"}], ":=", " ", 
+  RowBox[{"DialogInput", "[", 
+   RowBox[{"Column", "[", 
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"Beep", "[", "]"}], ";", 
+       RowBox[{"TextCell", "[", 
+        RowBox[{"s", ",", "\"\<Subsubsection\>\""}], "]"}]}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"DefaultButton", "[", 
+       RowBox[{"\"\<    OK    \>\"", ",", 
+        RowBox[{"DialogReturn", "[", "True", "]"}]}], "]"}]}], 
+     "\[IndentingNewLine]", "}"}], "]"}], "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.40899042003125*^9, 3.40899043675*^9}, {
+  3.408990469421875*^9, 3.4089904950625*^9}, {3.4089906235*^9, 
+  3.40899069334375*^9}, {3.408990747890625*^9, 3.408990782046875*^9}, {
+  3.40899083978125*^9, 3.408990875234375*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["copy with prompt to replace", "Subsubsection",
+ CellChangeTimes->{{3.408990114578125*^9, 3.40899012746875*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"filecopier", "[", 
+    RowBox[{"sourcedir_", ",", " ", "destdir_", ",", "file_"}], "]"}], ":=", 
+   "\[IndentingNewLine]", 
+   RowBox[{"If", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"FileNames", "[", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{"destdir", ",", "file"}], "}"}], "]"}], "]"}], "==", 
+       RowBox[{"{", "}"}]}], " ", "||", "\[IndentingNewLine]", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"ChoiceDialog", "[", 
+         RowBox[{"TextCell", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Beep", "[", "]"}], ";", 
+            RowBox[{"\"\<Destination file \>\"", "<>", "\[IndentingNewLine]", 
+             RowBox[{"FileNameJoin", "[", 
+              RowBox[{"{", 
+               RowBox[{"destdir", ",", "file"}], "}"}], "]"}], "<>", 
+             "\"\< exists. Replace it?\>\""}]}], ",", 
+           "\"\<Subsubsection\>\""}], "]"}], "]"}], "\[IndentingNewLine]", "&&",
+         " ", 
+        RowBox[{
+         RowBox[{"DeleteFile", "[", 
+          RowBox[{"FileNameJoin", "[", 
+           RowBox[{"{", 
+            RowBox[{"destdir", ",", "file"}], "}"}], "]"}], "]"}], "=!=", 
+         "$Failed"}]}], ")"}]}], ",", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"CopyFile", "[", 
+      RowBox[{
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{"sourcedir", ",", "file"}], "}"}], "]"}], ",", 
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{"destdir", ",", "file"}], "}"}], "]"}]}], "]"}], ",", 
+     "\[IndentingNewLine]", "$Failed"}], "\[IndentingNewLine]", "]"}]}], 
+  "\[IndentingNewLine]"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.389026818532625*^9, 3.38902688236075*^9}, {
+   3.38902692686075*^9, 3.389027012501375*^9}, {3.389027049938875*^9, 
+   3.38902711679825*^9}, {3.38902858929825*^9, 3.38902859717325*^9}, {
+   3.389028632782625*^9, 3.3890286670795*^9}, {3.389028709313875*^9, 
+   3.389028717345125*^9}, 3.389028873345125*^9, {3.389028984876375*^9, 
+   3.389029042313875*^9}, {3.408897499226203*^9, 3.408897514023078*^9}, {
+   3.408898132898078*^9, 3.408898133710578*^9}, {3.408898265929328*^9, 
+   3.408898294960578*^9}, {3.408898423679328*^9, 3.408898427835578*^9}, {
+   3.408898476929328*^9, 3.408898514007453*^9}, {3.408913696835578*^9, 
+   3.408913712882453*^9}, 3.4089903769375*^9, {3.408991185*^9, 
+   3.408991232546875*^9}, 3.4089913389375*^9, {3.545747151459972*^9, 
+   3.5457471875116353`*^9}, {3.5457473009082346`*^9, 
+   3.5457473072106457`*^9}, {3.545747340438704*^9, 3.545747354556729*^9}, {
+   3.545748162860549*^9, 3.545748168351759*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"dircopier", "[", 
+    RowBox[{"sourcedir_", ",", " ", "destdir_", ",", "dir_"}], "]"}], ":=", 
+   "\[IndentingNewLine]", 
+   RowBox[{"If", "[", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+      RowBox[{
+       RowBox[{"FileNames", "[", 
+        RowBox[{"FileNameJoin", "[", 
+         RowBox[{"{", 
+          RowBox[{"destdir", ",", "dir"}], "}"}], "]"}], "]"}], "==", 
+       RowBox[{"{", "}"}]}], " ", "||", "\[IndentingNewLine]", 
+      RowBox[{"(", 
+       RowBox[{
+        RowBox[{"ChoiceDialog", "[", 
+         RowBox[{"TextCell", "[", 
+          RowBox[{
+           RowBox[{
+            RowBox[{"Beep", "[", "]"}], ";", 
+            RowBox[{"\"\<Destination directory \>\"", "<>", 
+             RowBox[{"FileNameJoin", "[", 
+              RowBox[{"{", 
+               RowBox[{"destdir", ",", "dir"}], "}"}], "]"}], "<>", 
+             "\"\< exists. Replace its contents?\>\""}]}], ",", 
+           "\"\<Subsubsection\>\""}], "]"}], "]"}], "\[IndentingNewLine]", "&&",
+         " ", 
+        RowBox[{
+         RowBox[{"DeleteDirectory", "[", 
+          RowBox[{
+           RowBox[{"FileNameJoin", "[", 
+            RowBox[{"{", 
+             RowBox[{"destdir", ",", "dir"}], "}"}], "]"}], ",", 
+           RowBox[{"DeleteContents", "\[Rule]", "True"}]}], "]"}], "=!=", 
+         "$Failed"}]}], ")"}]}], ",", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"CopyDirectory", "[", 
+      RowBox[{
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{"sourcedir", ",", "dir"}], "}"}], "]"}], ",", 
+       RowBox[{"FileNameJoin", "[", 
+        RowBox[{"{", 
+         RowBox[{"destdir", ",", "dir"}], "}"}], "]"}]}], "]"}], ",", 
+     "\[IndentingNewLine]", "$Failed"}], "\[IndentingNewLine]", "]"}]}], 
+  "\[IndentingNewLine]"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.389026818532625*^9, 3.38902688236075*^9}, {
+   3.38902692686075*^9, 3.389027012501375*^9}, {3.389027049938875*^9, 
+   3.38902711679825*^9}, {3.38902858929825*^9, 3.38902859717325*^9}, {
+   3.389028632782625*^9, 3.3890286670795*^9}, {3.389028709313875*^9, 
+   3.389028717345125*^9}, 3.389028873345125*^9, {3.389028984876375*^9, 
+   3.389029042313875*^9}, {3.408897499226203*^9, 3.408897514023078*^9}, {
+   3.408898132898078*^9, 3.408898133710578*^9}, {3.408898265929328*^9, 
+   3.408898294960578*^9}, {3.408898423679328*^9, 3.408898427835578*^9}, {
+   3.408898476929328*^9, 3.408898569944953*^9}, {3.408898658944953*^9, 
+   3.408898662866828*^9}, 3.408898708944953*^9, {3.408898760773078*^9, 
+   3.408898768273078*^9}, 3.408899025788703*^9, 3.408990382984375*^9, {
+   3.5457481978826103`*^9, 3.545748252201906*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["install the packages to the proper locations", "Subsubsection",
+ CellChangeTimes->{{3.408990114578125*^9, 3.40899012746875*^9}, {
+  3.408991690609375*^9, 3.40899170228125*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"installCurveFitPackage", "[", "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", "dir", "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"If", "[", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{
+       RowBox[{"(", 
+        RowBox[{"dir", "=", 
+         RowBox[{"ChoiceDialog", "[", 
+          RowBox[{
+           RowBox[{"TextCell", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"Beep", "[", "]"}], ";", 
+              "\"\<Install the CurveFit package?\>\""}], ",", 
+             "\"\<Subsubsection\>\""}], "]"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"\"\<For all users\>\"", "\[Rule]", "allusersdir"}], ",", 
+             RowBox[{"\"\<For just you\>\"", "\[Rule]", "oneuserdir"}], ",", 
+             "\[IndentingNewLine]", 
+             RowBox[{"\"\<Cancel\>\"", "\[Rule]", "$Canceled"}]}], "}"}]}], 
+          "]"}]}], ")"}], "=!=", "$Canceled"}], ",", "\[IndentingNewLine]", 
+      "\[IndentingNewLine]", 
+      RowBox[{"(*", " ", 
+       RowBox[{
+        RowBox[{
+        "If", " ", "installing", " ", "for", " ", "all", " ", "users"}], ",", 
+        " ", 
+        RowBox[{
+        "and", " ", "oneuserdir", " ", "has", " ", "CurveFit", " ", "or", " ",
+          "ErrorBarLogPlots"}], ",", " ", 
+        RowBox[{"delete", " ", "it"}]}], " ", "*)"}], "\[IndentingNewLine]", 
+      RowBox[{
+       RowBox[{"If", "[", " ", 
+        RowBox[{
+         RowBox[{"dir", "===", "allusersdir"}], ",", "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"Quiet", "[", 
+           RowBox[{"DeleteDirectory", "[", 
+            RowBox[{
+             RowBox[{"FileNameJoin", "[", 
+              RowBox[{"{", 
+               RowBox[{"oneuserdir", ",", "\"\<CurveFit\>\""}], "}"}], "]"}], 
+             ",", 
+             RowBox[{"DeleteContents", "\[Rule]", "True"}]}], "]"}], "]"}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"Quiet", "[", 
+           RowBox[{"DeleteFile", "[", 
+            RowBox[{"FileNameJoin", "[", 
+             RowBox[{"{", 
+              RowBox[{"oneuserdir", ",", "\"\<ErrorBarLogPlots.m\>\""}], 
+              "}"}], "]"}], "]"}], "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"Quiet", "[", 
+           RowBox[{"DeleteDirectory", "[", 
+            RowBox[{
+             RowBox[{"FileNameJoin", "[", 
+              RowBox[{"{", 
+               RowBox[{"oneuserdir", ",", "\"\<ErrorBarLogPlots\>\""}], "}"}],
+               "]"}], ",", 
+             RowBox[{"DeleteContents", "\[Rule]", "True"}]}], "]"}], 
+           "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+       "\[IndentingNewLine]", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{"dircopier", "[", 
+           RowBox[{"packagedir", ",", "dir", ",", "\"\<CurveFit\>\""}], "]"}],
+           "=!=", " ", "$Failed"}], ",", "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{
+          "alertdialog", "[", "\"\<CurveFit package installed.\>\"", "]"}], 
+          ";", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"FileNames", "[", 
+              RowBox[{"FileNameJoin", "[", 
+               RowBox[{"{", 
+                RowBox[{"dir", ",", "\"\<ErrorBarLogPlots.m\>\""}], "}"}], 
+               "]"}], "]"}], "\[NotEqual]", 
+             RowBox[{"{", "}"}]}], ",", 
+            RowBox[{"DeleteFile", "[", 
+             RowBox[{"FileNameJoin", "[", 
+              RowBox[{"{", 
+               RowBox[{"dir", ",", "\"\<ErrorBarLogPlots.m\>\""}], "}"}], 
+              "]"}], "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+          RowBox[{"If", "[", 
+           RowBox[{
+            RowBox[{
+             RowBox[{"dircopier", "[", 
+              RowBox[{
+              "packagedir", ",", "dir", ",", "\"\<ErrorBarLogPlots\>\""}], 
+              "]"}], "=!=", " ", "$Failed"}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{
+             "alertdialog", "[", 
+              "\"\<ErrorBarLogPlots package installed.\>\"", "]"}], ";", " ", 
+             "True"}], ",", "\[IndentingNewLine]", 
+            RowBox[{
+             RowBox[{"alertdialog", "[", "\[IndentingNewLine]", 
+              RowBox[{
+              "\"\<ErrorBarLogPlots package installation failed!\\n\>\"", "<>",
+                "\[IndentingNewLine]", 
+               "\"\<An old file or directory may be Read-Only, or you may \
+\>\"", "<>", "\[IndentingNewLine]", 
+               "\"\<not have permission to write files to \>\"", "<>", " ", 
+               "dir"}], "\[IndentingNewLine]", "]"}], ";", " ", "$Failed"}]}],
+            "\[IndentingNewLine]", "]"}]}], ",", "\[IndentingNewLine]", 
+         "\[IndentingNewLine]", 
+         RowBox[{
+          RowBox[{"alertdialog", "[", 
+           RowBox[{
+           "\"\<CurveFit package installation failed!\\n\>\"", "<>", 
+            "\[IndentingNewLine]", 
+            "\"\<An old file or directory may be Read-Only, or you may \>\"", 
+            "<>", "\[IndentingNewLine]", 
+            "\"\<not have permission to write files to \>\"", "<>", " ", 
+            "dir"}], "\[IndentingNewLine]", "]"}], ";", " ", "$Failed"}]}], 
+        "\[IndentingNewLine]", "]"}]}], ",", "\[IndentingNewLine]", 
+      "$Canceled"}], "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", 
+   "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.389028486907625*^9, 3.389028509313875*^9}, {
+   3.389029530813875*^9, 3.389029545267*^9}, {3.389030214767*^9, 
+   3.389030389626375*^9}, {3.389030573845125*^9, 3.389030577345125*^9}, {
+   3.38903060767325*^9, 3.389030704267*^9}, {3.38903076054825*^9, 
+   3.389030799188875*^9}, 3.408898801319953*^9, {3.408898834882453*^9, 
+   3.408898835382453*^9}, {3.408898883991828*^9, 3.408898927429328*^9}, {
+   3.408913758976203*^9, 3.408913805351203*^9}, {3.408914162023078*^9, 
+   3.408914186694953*^9}, {3.408914229976203*^9, 3.408914260866828*^9}, {
+   3.408914325835578*^9, 3.408914330429328*^9}, {3.408914426538703*^9, 
+   3.408914486444953*^9}, {3.408914533429328*^9, 3.408914556288703*^9}, {
+   3.408914696288703*^9, 3.408914727429328*^9}, 3.408914776835578*^9, {
+   3.408914807398078*^9, 3.408914914991828*^9}, {3.408914954944953*^9, 
+   3.408914962726203*^9}, {3.408915002585578*^9, 3.408915049569953*^9}, 
+   3.408990392765625*^9, {3.408991504890625*^9, 3.408991549203125*^9}, {
+   3.408991579609375*^9, 3.40899159734375*^9}, 3.408991632859375*^9, {
+   3.408994236953125*^9, 3.408994262140625*^9}, {3.534600150005949*^9, 
+   3.5346001567973375`*^9}, 3.534607448769414*^9, 3.534607492131894*^9, {
+   3.5346075275529203`*^9, 3.534607545151927*^9}, {3.5346076009031153`*^9, 
+   3.5346076884601235`*^9}, {3.5457483199528246`*^9, 
+   3.5457483395776596`*^9}, {3.5457484211814027`*^9, 
+   3.5457485265439873`*^9}, {3.545748558586444*^9, 3.5457485650604553`*^9}, 
+   3.5457486277413654`*^9, {3.5671938748632355`*^9, 3.5671939770590153`*^9}, {
+   3.5671940275251036`*^9, 3.56719405948956*^9}, {3.567194091469616*^9, 
+   3.567194171996958*^9}, {3.5671942427118816`*^9, 3.567194285409157*^9}, {
+   3.56719433291124*^9, 3.567194351834073*^9}, {3.567194386934135*^9, 
+   3.5671944791770973`*^9}, {3.5671947669352026`*^9, 3.5671947857800355`*^9}}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["install the CurveFit folder in the user's documents area", \
+"Subsubsection",
+ CellChangeTimes->{{3.408990114578125*^9, 3.40899012746875*^9}, {
+  3.408991690609375*^9, 3.40899170228125*^9}, {3.408991736078125*^9, 
+  3.408991754578125*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"installCurveFitDocs", "[", "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"If", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"FileNames", "[", "curvefitdir", "]"}], "==", 
+        RowBox[{"{", "}"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"dircopier", "[", 
+        RowBox[{"thisdir", ",", "docsdir", ",", "\"\<CurveFit\>\""}], "]"}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"If", "[", 
+        RowBox[{
+         RowBox[{
+          RowBox[{
+           RowBox[{"dircopier", "[", 
+            RowBox[{
+             RowBox[{"FileNameJoin", "[", 
+              RowBox[{"{", 
+               RowBox[{"thisdir", ",", "\"\<CurveFit\>\""}], "}"}], "]"}], 
+             ",", "curvefitdir", ",", "\"\<Sample Data\>\""}], "]"}], "===", 
+           "$Failed"}], " ", "||", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"filecopier", "[", 
+            RowBox[{
+             RowBox[{"FileNameJoin", "[", 
+              RowBox[{"{", 
+               RowBox[{"thisdir", ",", "\"\<CurveFit\>\""}], "}"}], "]"}], 
+             ",", "curvefitdir", ",", "\"\<Launch.nb\>\""}], "]"}], "===", 
+           "$Failed"}], "  ", "||", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"filecopier", "[", 
+            RowBox[{
+             RowBox[{"FileNameJoin", "[", 
+              RowBox[{"{", 
+               RowBox[{"thisdir", ",", "\"\<CurveFit\>\""}], "}"}], "]"}], 
+             ",", "curvefitdir", ",", "\"\<Fit any function.nb\>\""}], "]"}], 
+           "===", "$Failed"}], "  ", "||", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"filecopier", "[", 
+            RowBox[{
+             RowBox[{"FileNameJoin", "[", 
+              RowBox[{"{", 
+               RowBox[{"thisdir", ",", "\"\<CurveFit\>\""}], "}"}], "]"}], 
+             ",", "curvefitdir", ",", "\"\<README.txt\>\""}], "]"}], "===", 
+           "$Failed"}]}], " ", ",", "\[IndentingNewLine]", "$Failed"}], 
+        "\[IndentingNewLine]", "]"}]}], "\[IndentingNewLine]", "]"}], " ", "===",
+      " ", "$Failed"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"alertdialog", "[", 
+      RowBox[{
+      "\"\<Unable to copy all CurveFit sample files!\\n\>\"", "<>", 
+       "\[IndentingNewLine]", 
+       "\"\<An old file or directory may be Read-Only.\>\""}], "]"}], ";", 
+     "$Failed"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{
+     "alertdialog", "[", "\"\<CurveFit sample files installed.\>\"", "]"}], 
+     ";", "True"}]}], "\[IndentingNewLine]", "]"}]}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.408991774671875*^9, 3.408991838328125*^9}, {
+   3.408991926484375*^9, 3.4089919461875*^9}, {3.40899199965625*^9, 
+   3.408992001*^9}, {3.40899271215625*^9, 3.408992750890625*^9}, {
+   3.4089935030625*^9, 3.4089935764375*^9}, {3.408993635171875*^9, 
+   3.40899366109375*^9}, {3.408993692203125*^9, 3.408993694546875*^9}, {
+   3.4089937256875*^9, 3.40899375353125*^9}, {3.4089938700625*^9, 
+   3.408993880046875*^9}, {3.408994006765625*^9, 3.408994153703125*^9}, {
+   3.40899429434375*^9, 3.40899445378125*^9}, 3.40899559925*^9, {
+   3.41546791939775*^9, 3.415467927288375*^9}, {3.5346003452421155`*^9, 
+   3.534600357369809*^9}, {3.545748707816306*^9, 3.5457487626036024`*^9}, {
+   3.5457488550181646`*^9, 3.5457488840030155`*^9}}]
+}, Closed]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Run Installer", "Subsection",
+ InitializationCell->True,
+ CellChangeTimes->{{3.389031006657625*^9, 3.389031009751375*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"If", "[", 
+   RowBox[{
+    RowBox[{"$VersionNumber", " ", "\[GreaterEqual]", " ", "7.0"}], ",", "\n", 
+    RowBox[{"With", "[", 
+     RowBox[{
+      RowBox[{"{", 
+       RowBox[{"status", " ", "=", 
+        RowBox[{"installCurveFitPackage", "[", "]"}]}], "}"}], ",", 
+      "\[IndentingNewLine]", 
+      RowBox[{"If", "[", 
+       RowBox[{
+        RowBox[{
+         RowBox[{"status", "=!=", "$Canceled"}], " ", "&&", " ", 
+         RowBox[{"status", "=!=", "$Failed"}]}], ",", 
+        RowBox[{"installCurveFitDocs", "[", "]"}], ",", "status"}], "]"}]}], 
+     " ", "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", "CurveFit", "}"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"CurveFit", "::", "version"}], " ", "=", " ", 
+        "\"\<You need at least Mathematica Version 7 for this package!\>\""}],
+        ";", 
+       RowBox[{"Message", "[", 
+        RowBox[{"CurveFit", "::", "version"}], "]"}], ";"}]}], 
+     "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+    RowBox[{"Block", "[", 
+     RowBox[{
+      RowBox[{"{", "CurveFit", "}"}], ",", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"CurveFit", "::", "version"}], " ", "=", " ", 
+        "\"\<You need at least Mathematica Version 7 for this package!\>\""}],
+        ";", 
+       RowBox[{"Message", "[", 
+        RowBox[{"CurveFit", "::", "version"}], "]"}], ";"}]}], 
+     "\[IndentingNewLine]", "]"}]}], "\n", "]"}], "\n"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.38903089423575*^9, 3.3890309308295*^9}, 
+   3.408915219382453*^9, {3.40899452365625*^9, 3.40899460565625*^9}, {
+   3.408994638578125*^9, 3.40899467390625*^9}, {3.4097000147557497`*^9, 
+   3.4097001502557497`*^9}, {3.5457489368871083`*^9, 3.545748957572745*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CopyDirectory", "::", "\<\"fstr\"\>"}], 
+  RowBox[{
+  ":", " "}], "\<\"\\!\\(\\*StyleBox[\\\"\\\\\\\"File specification \
+\\\\\\\"\\\", \
+\\\"MT\\\"]\\)\[NoBreak]\\!\\(\\*StyleBox[\\!\\(FileNameJoin[\\(\\({\\(\\(\
+FileNameJoin[\\(\\({\\\"C:\\\\\\\\Users\\\\\\\\Rice\\\\\\\\Desktop\\\\\\\\\
+CurveFit\\\\\\\\CurveFit\\\\\\\\\\\", \\(\\(If[\\(\\(\\(\\(7.` < legacyVer\\)\
+\\), \\\"legacy_package\\\", \\\"package\\\"\\)\\)]\\)\\)}\\)\\)]\\)\\), \
+\\\"CurveFit\\\"}\\)\\)]\\), \\\"MT\\\"]\\)\[NoBreak]\\!\\(\\*StyleBox[\\\"\\\
+\\\\\" is not a string of one or more characters.\\\\\\\"\\\", \\\"MT\\\"]\\) \
+\\!\\(\\*ButtonBox[\\\"\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", \
+ButtonFrame->None, ButtonData:>\\\"paclet:ref/message/General/fstr\\\", \
+ButtonNote -> \\\"CopyDirectory::fstr\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.6610095325336404`*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"CopyDirectory", "::", "\<\"fstr\"\>"}], 
+  RowBox[{
+  ":", " "}], "\<\"\\!\\(\\*StyleBox[\\\"\\\\\\\"File specification \
+\\\\\\\"\\\", \
+\\\"MT\\\"]\\)\[NoBreak]\\!\\(\\*StyleBox[\\!\\(FileNameJoin[\\(\\({\\(\\(\
+FileNameJoin[\\(\\({\\\"C:\\\\\\\\Users\\\\\\\\Rice\\\\\\\\Desktop\\\\\\\\\
+CurveFit\\\\\\\\CurveFit\\\\\\\\\\\", \\(\\(If[\\(\\(\\(\\(7.` < legacyVer\\)\
+\\), \\\"legacy_package\\\", \\\"package\\\"\\)\\)]\\)\\)}\\)\\)]\\)\\), \
+\\\"ErrorBarLogPlots\\\"}\\)\\)]\\), \
+\\\"MT\\\"]\\)\[NoBreak]\\!\\(\\*StyleBox[\\\"\\\\\\\" is not a string of one \
+or more characters.\\\\\\\"\\\", \\\"MT\\\"]\\) \\!\\(\\*ButtonBox[\\\"\
+\[RightSkeleton]\\\", ButtonStyle->\\\"Link\\\", ButtonFrame->None, \
+ButtonData:>\\\"paclet:ref/message/General/fstr\\\", ButtonNote -> \
+\\\"CopyDirectory::fstr\\\"]\\)\"\>"}]], "Message", "MSG",
+ CellChangeTimes->{3.661009534953644*^9}],
+
+Cell[BoxData["$Failed"], "Output",
+ CellChangeTimes->{3.40899538275*^9, 3.408995578953125*^9, 
+  3.408995652484375*^9, 3.408995708984375*^9, 3.408995828*^9, 
+  3.4097002846151247`*^9, 3.4097003275682497`*^9, 3.4097008260213747`*^9, 
+  3.6610095424636545`*^9}]
+}, Open  ]]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["Load and Launch :", "Subsection",
+ CellChangeTimes->{{3.38903111161075*^9, 3.389031123220125*^9}, {
+  3.4096999010682497`*^9, 3.4096999100682497`*^9}}],
+
+Cell["\<\
+The CurveFit Launch notebook and the sample data files are in directory :\
+\>", "Text",
+ CellChangeTimes->{{3.4097004857401247`*^9, 3.4097005218807497`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData["curvefitdir"], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.4097005839276247`*^9, 3.4097005870369997`*^9}, 
+   3.545749047444503*^9}],
+
+Cell[BoxData["\<\"C:\\\\Users\\\\Rice\\\\Documents\\\\CurveFit\"\>"], "Output",
+ CellChangeTimes->{3.6610095424736547`*^9}]
+}, Open  ]],
+
+Cell["Here' s how you load the package and start CurveFit:", "Text",
+ CellChangeTimes->{{3.4097005994901247`*^9, 3.4097006219744997`*^9}, 
+   3.4097007720682497`*^9}],
+
+Cell[BoxData[
+ RowBox[{"<<", " ", "CurveFit`"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.4096999273026247`*^9, 3.4096999405369997`*^9}, 
+   3.5346003853364086`*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+AutoGeneratedPackage->None,
+InitializationCellEvaluation->True,
+InitializationCellWarning->False,
+WindowSize->{617, 849},
+WindowMargins->{{311, Automatic}, {Automatic, 24}},
+ShowSelection->True,
+ShowCellLabel->False,
+PrivateNotebookOptions -> {
+ "VersionedStylesheet" -> {"Default.nb"[8.] -> True}},
+FrontEndVersion->"7.0 for Microsoft Windows (64-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 187, 2, 49, "Subtitle"],
+Cell[757, 26, 428, 9, 67, "Subsubtitle"],
+Cell[CellGroupData[{
+Cell[1210, 39, 142, 2, 36, "Subsection",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[1377, 45, 101, 1, 27, "Subsubsection"],
+Cell[1481, 48, 2559, 53, 152, "Input",
+ InitializationCell->True]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[4077, 106, 196, 3, 21, "Subsubsection"],
+Cell[4276, 111, 838, 20, 72, "Input",
+ InitializationCell->True]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[5151, 136, 117, 1, 21, "Subsubsection"],
+Cell[5271, 139, 2733, 60, 232, "Input",
+ InitializationCell->True],
+Cell[8007, 201, 2698, 60, 232, "Input",
+ InitializationCell->True]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[10742, 266, 182, 2, 21, "Subsubsection"],
+Cell[10927, 270, 7362, 152, 732, "Input",
+ InitializationCell->True]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[18326, 427, 245, 4, 21, "Subsubsection"],
+Cell[18574, 433, 3396, 73, 312, "Input",
+ InitializationCell->True]
+}, Closed]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[22019, 512, 128, 2, 28, "Subsection",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[22172, 518, 1838, 44, 252, "Input",
+ InitializationCell->True],
+Cell[24013, 564, 902, 15, 70, "Message"],
+Cell[24918, 581, 910, 16, 70, "Message"],
+Cell[25831, 599, 259, 4, 70, "Output"]
+}, Open  ]]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[26139, 609, 157, 2, 28, "Subsection"],
+Cell[26299, 613, 167, 3, 29, "Text"],
+Cell[CellGroupData[{
+Cell[26491, 620, 160, 3, 31, "Input",
+ InitializationCell->True],
+Cell[26654, 625, 123, 1, 30, "Output"]
+}, Open  ]],
+Cell[26792, 629, 166, 2, 29, "Text"],
+Cell[26961, 633, 183, 4, 31, "Input",
+ InitializationCell->True]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

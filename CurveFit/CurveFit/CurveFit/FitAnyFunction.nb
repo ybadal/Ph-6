@@ -1,0 +1,1604 @@
+(* Content-type: application/mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 7.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       145,          7]
+NotebookDataLength[     63773,       1595]
+NotebookOptionsPosition[     59290,       1438]
+NotebookOutlinePosition[     60529,       1486]
+CellTagsIndexPosition[     60308,       1476]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell[TextData[{
+ "Fitting a function ",
+ StyleBox["you",
+  FontWeight->"Bold",
+  FontSlant->"Italic"],
+ " define to your ",
+ StyleBox["CurveFit",
+  FontSlant->"Italic"],
+ " data"
+}], "Subtitle",
+ CellChangeTimes->{{3.480607920296875*^9, 3.480607960921875*^9}, {
+  3.48061043321875*^9, 3.480610447109375*^9}, {3.480610477953125*^9, 
+  3.480610510359375*^9}},
+ CellTags->"Title"],
+
+Cell[TextData[{
+ "This notebook extends the ",
+ StyleBox["CurveFit",
+  FontSlant->"Italic"],
+ " data analysis package by providing additional functions to fit data to an \
+arbitrary model. With this capability you are no longer limited to the finite \
+list of models provided by the ",
+ StyleBox["CurveFit",
+  FontSlant->"Italic"],
+ " fitting functions. They are compatible with the existing fitting \
+functions, using the ",
+ StyleBox["CurveFit",
+  FontSlant->"Italic"],
+ " data set and supporting its plotting routines."
+}], "Text",
+ CellChangeTimes->{{3.480607984890625*^9, 3.4806081529375*^9}, {
+  3.480608220296875*^9, 3.480608401171875*^9}, {3.480679597375*^9, 
+  3.48067959846875*^9}}],
+
+Cell[TextData[{
+ "The big difference between this new function and the existing ",
+ StyleBox["CurveFit",
+  FontSlant->"Italic"],
+ " model fitting functions is that you must construct a ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " command which provides not only the expression describing the function you \
+want to fit but also includes starting values for the model parameters you \
+are optimizing. See the ",
+ StyleBox[ButtonBox["example",
+  BaseStyle->"Hyperlink",
+  ButtonData->"Example"],
+  FontWeight->"Bold"],
+ " for details about how to call the function and use its results."
+}], "Text",
+ CellChangeTimes->{{3.480607984890625*^9, 3.4806081529375*^9}, {
+   3.480608220296875*^9, 3.480608401171875*^9}, {3.48061225765625*^9, 
+   3.480612501921875*^9}, 3.480612551390625*^9}],
+
+Cell[TextData[{
+ "You must have installed the ",
+ StyleBox["CurveFit",
+  FontSlant->"Italic"],
+ " package to use these functions; the notebook will load and launch ",
+ StyleBox["CurveFit",
+  FontSlant->"Italic"],
+ " when it executes. The functions defined in this notebook require ",
+ StyleBox["Mathematica",
+  FontSlant->"Italic"],
+ " version 7 or later."
+}], "Text",
+ CellChangeTimes->{{3.480607984890625*^9, 3.4806082054375*^9}, {
+  3.480608328109375*^9, 3.480608332359375*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+
+Contents\
+\>", "Subsection",
+ CellDingbat->None,
+ CellChangeTimes->{{3.480609731546875*^9, 3.480609733984375*^9}, 
+   3.480679797625*^9},
+ CellTags->"Contents"],
+
+Cell[CellGroupData[{
+
+Cell["Descriptions of the new functions", "Subsubsection",
+ CellChangeTimes->{{3.48060989803125*^9, 3.480609907984375*^9}, {
+  3.48061253609375*^9, 3.48061254146875*^9}}],
+
+Cell[TextData[{
+ ButtonBox["FitData\n",
+  BaseStyle->"Hyperlink",
+  ButtonData->"FitData Info"],
+ ButtonBox["Model\n",
+  BaseStyle->"Hyperlink",
+  ButtonData->"Model Info"],
+ ButtonBox["ChiSquared",
+  BaseStyle->"Hyperlink",
+  ButtonData->"ChiSquared Info"]
+}], "Text",
+ CellChangeTimes->{{3.4806100265*^9, 3.48061004975*^9}, {3.4806797200625*^9, 
+  3.48067972778125*^9}}]
+}, Open  ]],
+
+Cell[TextData[ButtonBox["Example",
+ BaseStyle->"Hyperlink",
+ ButtonData->"Example"]], "Subsubsection",
+ CellChangeTimes->{{3.48060989803125*^9, 3.480609907984375*^9}, {
+  3.48061012978125*^9, 3.480610145234375*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Load and start ",
+ StyleBox["CurveFit",
+  FontSlant->"Italic"]
+}], "Section",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480607676671875*^9, 3.48060767853125*^9}, {
+  3.480612603890625*^9, 3.480612637625*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Needs", "[", "\"\<CurveFit`\>\"", "]"}], ";"}]], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{3.479921953857375*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Function Definitions", "Section",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480607676671875*^9, 3.48060767853125*^9}, {
+  3.48061265796875*^9, 3.480612660125*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["The public symbols in context CurveFit", "Subsection",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480600569453125*^9, 3.48060059459375*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Begin", "[", "\"\<CurveFit`\>\"", "]"}], ";"}]], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480600451296875*^9, 3.4806004521875*^9}, {
+  3.4806005405625*^9, 3.480600561953125*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Quiet", "[", 
+   RowBox[{"Remove", "[", 
+    RowBox[{"ChiSquared", ",", "\"\<Global`ChiSquared\>\""}], "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"ChiSquared", "::", "usage"}], " ", "=", " ", 
+   RowBox[{"\"\<ChiSquared[\!\(\*
+StyleBox[\"f\",
+FontSlant->\"Italic\"]\)] calculates the \[Chi]-\!\(\*
+StyleBox[\"squared\",
+FontSlant->\"Italic\"]\) value for the function named \!\(\*
+StyleBox[\"f\",
+FontSlant->\"Italic\"]\) over the \!\(\*
+StyleBox[\"CurveFit\",
+FontSlant->\"Italic\"]\) data set.\\n\\n\>\"", "<>", "\[IndentingNewLine]", 
+    "\"\<ChiSquared[\!\(\*
+StyleBox[\"f\",
+FontSlant->\"Italic\"]\),\!\(\*
+StyleBox[\"p\",
+FontSlant->\"Italic\"]\)] calculates the \!\(\*
+StyleBox[\"reduced\",
+FontSlant->\"Italic\"]\) \[Chi]-\!\(\*
+StyleBox[\"squared\",
+FontSlant->\"Italic\"]\) value for the function named \!\(\*
+StyleBox[\"f\",
+FontSlant->\"Italic\"]\) that was fit to the data using \!\(\*
+StyleBox[\"p\",
+FontSlant->\"Italic\"]\) parameters.\\n\\n\>\"", "<>", "\[IndentingNewLine]", 
+    "\"\<Note that the value returned is a \!\(\*
+StyleBox[\"generalized\",
+FontSlant->\"Italic\"]\) \[Chi]-\!\(\*
+StyleBox[\"squared\",
+FontSlant->\"Italic\"]\) based on expected residual variances calculated from \
+both x and y uncertainties.\>\""}]}], ";"}]}], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.479922021482375*^9, 3.47992209990425*^9}, {
+   3.47992241446675*^9, 3.479922437138625*^9}, {3.47992249309175*^9, 
+   3.479922587982375*^9}, {3.479922620138625*^9, 3.479922660232375*^9}, {
+   3.479923018263625*^9, 3.47992310559175*^9}, {3.47992328659175*^9, 
+   3.479923358013625*^9}, {3.4799234275605*^9, 3.47992344409175*^9}, {
+   3.480076231826125*^9, 3.48007662396675*^9}, {3.480076666123*^9, 
+   3.480076901357375*^9}, {3.48007694546675*^9, 3.480076948201125*^9}, {
+   3.480076979669875*^9, 3.480076981169875*^9}, {3.480077018263625*^9, 
+   3.480077044763625*^9}, {3.480077111826125*^9, 3.480077164748*^9}, {
+   3.4800780363105*^9, 3.480078062419875*^9}, 3.480079571373*^9, 
+   3.48026218940625*^9, {3.480262328078125*^9, 3.480262342984375*^9}, {
+   3.48026247978125*^9, 3.4802624891875*^9}, {3.480262576578125*^9, 
+   3.4802625829375*^9}, {3.480265647734375*^9, 3.480265657078125*^9}, {
+   3.480265757453125*^9, 3.48026576340625*^9}, {3.48026584096875*^9, 
+   3.48026590346875*^9}, {3.48042064625*^9, 3.48042069609375*^9}, {
+   3.48042107009375*^9, 3.480421136390625*^9}, 3.480421890796875*^9, 
+   3.4804226685*^9, 3.480422805015625*^9, 3.480425689890625*^9, {
+   3.480600637703125*^9, 3.480600639734375*^9}, {3.480600679375*^9, 
+   3.480600705125*^9}, {3.480604413484375*^9, 3.4806046200625*^9}, 
+   3.480680113421875*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Quiet", "[", 
+   RowBox[{"Remove", "[", 
+    RowBox[{"FitData", ",", "\"\<Global`FitData\>\""}], "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FitData", "::", "usage"}], " ", "=", " ", 
+   RowBox[{"\"\<FitData[\!\(\*
+StyleBox[\"expr\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"v\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"{\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"p1\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"p2\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"...\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"}\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"{\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"s1\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"s2\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"...\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"}\",
+FontSlant->\"Italic\"]\)] fits the function defined by the expression \!\(\*
+StyleBox[\"expr\",
+FontSlant->\"Italic\"]\) to the \!\(\*
+StyleBox[\"CurveFit\",
+FontSlant->\"Italic\"]\) data set. The expression should describe a function \
+of the variable named \!\(\*
+StyleBox[\"v\",
+FontSlant->\"Italic\"]\) with the set of parameters named \!\(\*
+StyleBox[\"p1\",
+FontSlant->\"Italic\"]\), \!\(\*
+StyleBox[\"p2\",
+FontSlant->\"Italic\"]\), etc. You must provide a list of starting values \
+\!\(\*
+StyleBox[\"s1\",
+FontSlant->\"Italic\"]\), \!\(\*
+StyleBox[\"s2\",
+FontSlant->\"Italic\"]\), etc., for the parameters.\\n\>\"", "<>", 
+    "\[IndentingNewLine]", "\"\<The variable argument \!\(\*
+StyleBox[\"v\",
+FontSlant->\"Italic\"]\) and the parameter arguments \!\(\*
+StyleBox[\"p1\",
+FontSlant->\"Italic\"]\), \!\(\*
+StyleBox[\"p2\",
+FontSlant->\"Italic\"]\), etc. must be symbols; any values assigned to these \
+symbols will be cleared by FitData. The starting values \!\(\*
+StyleBox[\"s1\",
+FontSlant->\"Italic\"]\), \!\(\*
+StyleBox[\"s2\",
+FontSlant->\"Italic\"]\), etc. must evaluate to numbers. The expression \!\(\*
+StyleBox[\"expr\",
+FontSlant->\"Italic\"]\) will be evaluated for each X value in the \!\(\*
+StyleBox[\"CurveFit\",
+FontSlant->\"Italic\"]\) data set substituted for the variable \!\(\*
+StyleBox[\"v\",
+FontSlant->\"Italic\"]\) , and the result compared to its corresponding Y \
+value.\\n\\n\>\"", "<>", "\[IndentingNewLine]", "\"\<FitData[{\!\(\*
+StyleBox[\"expr\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"{\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"cons\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"..\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"}\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"}\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"v\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"{\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"p1\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"p2\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"...\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"}\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"{\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"s1\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"s2\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\",\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"...\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"}\",
+FontSlant->\"Italic\"]\)] fits the function defined by the expression \!\(\*
+StyleBox[\"expr\",
+FontSlant->\"Italic\"]\) but subject to the list of constraints on the \
+parameters given by \!\(\*
+StyleBox[\"{\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"cons\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"..\",
+FontSlant->\"Italic\"]\)\!\(\*
+StyleBox[\"}\",
+FontSlant->\"Italic\"]\). The acceptable forms for the expression and the \
+constraints are the same as for the \!\(\*
+StyleBox[\"Mathematica\",
+FontSlant->\"Italic\"]\) function FindFit[ ].\\n\\n\>\"", "<>", 
+    "\[IndentingNewLine]", "\"\<The routine uses the \!\(\*
+StyleBox[\"Mathematica\",
+FontSlant->\"Italic\"]\) function NonlinearModelFit[ ] to optimize the \
+parameter values and provides an output similar to the built-in CurveFit \
+fitting functions. The results of the fit are plottable using \!\(\*
+StyleBox[\"CurveFit\",
+FontSlant->\"Italic\"]\)'s plotting functions, and the best-fit function is \
+available as fY[x], as with \!\(\*
+StyleBox[\"CurveFit\",
+FontSlant->\"Italic\"]\)'s fitting functions. The final fitted model is \
+returned by calling the function Model; it returns a data structure of the \!\
+\(\*
+StyleBox[\"Mathematica\",
+FontSlant->\"Italic\"]\) type FittedModel.\\n\\n\>\"", "<>", 
+    "\[IndentingNewLine]", "\"\<Examples:\\n\>\"", "<>", " ", 
+    "\[IndentingNewLine]", 
+    "\"\<FitData[a Sin[b x + c], x, {a,b,c}, {1.2, 12.7, -0.3}] will fit the \
+function of x defined by the expression \\\"a Sin[b x + c]\\\" to the \
+CurveFit data by finding best-fit values for the parameters a, b, and c. The \
+starting values for these parameters will be a = 1.2, b = 12.7, and c = -0.3.\
+\\n\>\"", "<>", " ", "\[IndentingNewLine]", 
+    "\"\<FitData[{a Sin[b x + c],{a > 0}}, x, {a,b,c}, {1.2, 12.7, -0.3}] \
+fits the function as above, but subject to the constraint that the parameter \
+a must be positive.\\n\\n\>\"", "<>", "\[IndentingNewLine]", 
+    "\"\<FitData does not set the parameters to equal the best-fit values it \
+finds, unlike the other \!\(\*
+StyleBox[\"CurveFit\",
+FontSlant->\"Italic\"]\) fitting functions. It returns a list of rules to map \
+the parameters to their best-fit values; this list would also be returned by \
+a subsequent call of Model[\\\"BestFitParameters\\\"].\\n\\n\>\"", "<>", 
+    "\[IndentingNewLine]", "\"\<See also:\\n\>\"", "<>", 
+    "\[IndentingNewLine]", 
+    "\"\<Model, FittedModel, NonlinearModelFit, ChiSquared\>\""}]}], 
+  ";"}]}], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.479922021482375*^9, 3.47992209990425*^9}, {
+   3.47992241446675*^9, 3.479922437138625*^9}, {3.47992249309175*^9, 
+   3.479922587982375*^9}, {3.479922620138625*^9, 3.479922660232375*^9}, {
+   3.479923018263625*^9, 3.47992310559175*^9}, {3.47992328659175*^9, 
+   3.479923358013625*^9}, {3.4799234275605*^9, 3.47992344409175*^9}, {
+   3.480076231826125*^9, 3.48007662396675*^9}, {3.480076666123*^9, 
+   3.480076901357375*^9}, {3.48007694546675*^9, 3.480076948201125*^9}, {
+   3.480076979669875*^9, 3.480076981169875*^9}, {3.480077018263625*^9, 
+   3.480077044763625*^9}, {3.480077111826125*^9, 3.480077164748*^9}, {
+   3.4800780363105*^9, 3.480078062419875*^9}, 3.480079571373*^9, 
+   3.48026218940625*^9, {3.480262328078125*^9, 3.480262342984375*^9}, {
+   3.48026247978125*^9, 3.4802624891875*^9}, {3.480262576578125*^9, 
+   3.4802625829375*^9}, {3.480265647734375*^9, 3.480265657078125*^9}, {
+   3.480265757453125*^9, 3.48026576340625*^9}, {3.48026584096875*^9, 
+   3.48026590346875*^9}, {3.48042064625*^9, 3.48042069609375*^9}, {
+   3.48042107009375*^9, 3.480421136390625*^9}, 3.480421890796875*^9, 
+   3.4804226685*^9, 3.480422805015625*^9, 3.480425689890625*^9, {
+   3.480425727234375*^9, 3.480425887453125*^9}, {3.48042594284375*^9, 
+   3.480426403140625*^9}, {3.480426472578125*^9, 3.480426584625*^9}, {
+   3.48042666325*^9, 3.4804271481875*^9}, {3.48042730046875*^9, 
+   3.48042730134375*^9}, {3.48042733303125*^9, 3.480427497765625*^9}, {
+   3.48060071928125*^9, 3.48060073590625*^9}, {3.480602600453125*^9, 
+   3.480602941765625*^9}, 3.480603193171875*^9, {3.4806051416875*^9, 
+   3.48060540528125*^9}, {3.48060559328125*^9, 3.48060559596875*^9}, {
+   3.480606189109375*^9, 3.4806061895625*^9}, {3.480606243375*^9, 
+   3.48060624625*^9}, {3.480606283015625*^9, 3.48060629059375*^9}, {
+   3.480679897171875*^9, 3.480680105890625*^9}, 3.480680140703125*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"Quiet", "[", 
+   RowBox[{"Remove", "[", 
+    RowBox[{"Model", ",", "\"\<Global`Model\>\""}], "]"}], "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{
+    RowBox[{"Model", "::", "usage"}], " ", "=", " ", 
+    RowBox[{"\"\<Model returns a \!\(\*
+StyleBox[\"Mathematica\",
+FontSlant->\"Italic\"]\) object of type FittedModel which contains the \
+results of a call to FitData. Model is generated by the final call to \!\(\*
+StyleBox[\"Mathematica\",
+FontSlant->\"Italic\"]\)'s NonlinearModelFit[ ] when FitData executes, so see \
+the help for that function for a description of the arguments which may be \
+supplied to Model.\\n\>\"", "<>", "\[IndentingNewLine]", 
+     "\"\<Note that because FitData calls NonlinearModelFit with a variance \
+estimator function identically equal to 1 (so that the parameter errors are \
+calculated from the uncertainties in the CurveFit data set), \
+Model[\\\"EstimatedVariance\\\"] will return 1 rather than the reduced \
+\[Chi]-\!\(\*
+StyleBox[\"squared\",
+FontSlant->\"Italic\"]\) value of the fit. To get a correct reduced \[Chi]-\!\
+\(\*
+StyleBox[\"squared\",
+FontSlant->\"Italic\"]\) value for the fit with the current \!\(\*
+StyleBox[\"CurveFit\",
+FontSlant->\"Italic\"]\) data set, use the statement:\\n\>\"", "<>", 
+     "\[IndentingNewLine]", 
+     "\"\<\\t  \
+ChiSquared[Model,Length[Model[\\\"BestFitParameters\\\"]]]\\n\\n\>\"", "<>", 
+     "\[IndentingNewLine]", "\"\<Examples:\\n\>\"", "<>", 
+     "\[IndentingNewLine]", 
+     "\"\<Model[x] returns the best-fit function evaluated at x.\\n\>\"", "<>",
+      "\[IndentingNewLine]", 
+     "\"\<Model[\\\"Properties\\\"] returns a list of all the property names \
+which may be given as arguments to Model.\\n\>\"", "<>", 
+     "\[IndentingNewLine]", 
+     "\"\<Model[\\\"ParameterTable\\\"] returns a table of the fit results \
+and statistics for the fit parameters.\\n\>\"", "<>", "\[IndentingNewLine]", 
+     "\"\<Note that the form Model[x] may be used in any \!\(\*
+StyleBox[\"Mathematica\",
+FontSlant->\"Italic\"]\) expression (integrals, derivatives, plots, \
+etc.).\>\""}]}], ";"}], " "}]}], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480601246*^9, 3.480601616640625*^9}, {
+   3.480603859109375*^9, 3.480604236921875*^9}, {3.480604284921875*^9, 
+   3.480604285515625*^9}, {3.4806056569375*^9, 3.4806059184375*^9}, {
+   3.480605958375*^9, 3.480606024265625*^9}, 3.480680164828125*^9}]
+}, Closed]],
+
+Cell[CellGroupData[{
+
+Cell["The definitions and private symbols", "Subsection",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480600569453125*^9, 3.48060059459375*^9}, {
+  3.48060080565625*^9, 3.48060082134375*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Begin", "[", "\"\<`Private`\>\"", "]"}], ";"}]], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480600451296875*^9, 3.4806004521875*^9}, {
+  3.4806005405625*^9, 3.480600561953125*^9}, {3.480600834125*^9, 
+  3.480600838078125*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["ChiSquared[ ]", "Subsubsection",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480600569453125*^9, 3.48060059459375*^9}, {
+  3.48060080565625*^9, 3.48060082134375*^9}, {3.480601078546875*^9, 
+  3.48060108065625*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"ChiSquared", "[", "f_", "]"}], ":=", 
+   RowBox[{"(", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"!", 
+        RowBox[{"CurveFit`CheckLength", "[", "]"}]}], ",", " ", 
+       RowBox[{"Abort", "[", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Plus", "@@", 
+      FractionBox[
+       SuperscriptBox[
+        RowBox[{"(", 
+         RowBox[{"CurveFit`yy", "-", 
+          RowBox[{
+           RowBox[{"(", "f", ")"}], "/@", "CurveFit`xx"}]}], ")"}], "2"], 
+       RowBox[{
+        SuperscriptBox["CurveFit`sy", "2"], "+", 
+        SuperscriptBox[
+         RowBox[{"(", 
+          RowBox[{
+           RowBox[{"Thread", "[", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"(", "f", ")"}], "'"}], "[", "CurveFit`xx", "]"}], 
+            "]"}], "CurveFit`sx"}], ")"}], "2"]}]]}]}], "\[IndentingNewLine]",
+     ")"}]}], "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"ChiSquared", "[", 
+   RowBox[{"f_", ",", "p_"}], "]"}], ":=", 
+  FractionBox[
+   RowBox[{"ChiSquared", "[", "f", "]"}], 
+   RowBox[{"CurveFit`n", "-", "p"}]]}]}], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{
+  3.48026259696875*^9, {3.48026775153125*^9, 3.480267763171875*^9}, {
+   3.4806008699375*^9, 3.48060087940625*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["FormattedResults[ ], a private function used by FitData[ ]", \
+"Subsubsection",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480600569453125*^9, 3.48060059459375*^9}, {
+  3.48060080565625*^9, 3.48060082134375*^9}, {3.480601078546875*^9, 
+  3.48060108065625*^9}, {3.480601132515625*^9, 3.480601151359375*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"ClearAll", "[", "FormattedResults", "]"}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"FormattedResults", "[", 
+   RowBox[{
+   "names_List", ",", "values_List", ",", "errors_List", ",", "description_", 
+    ",", "variance_"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Row", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"\"\<\>\"", ",", "\[IndentingNewLine]", 
+      RowBox[{"Grid", "[", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Transpose", "[", "\[IndentingNewLine]", 
+         RowBox[{"{", 
+          RowBox[{"names", ",", 
+           RowBox[{"ConstantArray", "[", 
+            RowBox[{"\"\<=\>\"", ",", 
+             RowBox[{"Length", "[", "names", "]"}]}], "]"}], ",", "values", 
+           ",", 
+           RowBox[{"ConstantArray", "[", 
+            RowBox[{"\"\<\[PlusMinus]\>\"", ",", 
+             RowBox[{"Length", "[", "names", "]"}]}], "]"}], ",", "errors"}], 
+          "}"}], "\[IndentingNewLine]", "]"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Frame", "\[Rule]", "True"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Alignment", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"{", 
+           RowBox[{
+           "Center", ",", "Center", ",", "Right", ",", "Center", ",", 
+            "Left"}], "}"}], "}"}]}], ",", 
+        RowBox[{"Spacings", "\[Rule]", 
+         RowBox[{"{", 
+          RowBox[{"Automatic", ",", "1"}], "}"}]}]}], "\[IndentingNewLine]", 
+       "]"}], ",", "\[IndentingNewLine]", 
+      RowBox[{"Row", "[", 
+       RowBox[{"{", 
+        RowBox[{"description", ",", "variance"}], "}"}], "]"}]}], 
+     "\[IndentingNewLine]", "}"}], ",", "\[IndentingNewLine]", 
+    "\"\<     \>\""}], "]"}]}], "\[IndentingNewLine]"}], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480102596576125*^9, 3.48010265140425*^9}, {
+   3.480102694794875*^9, 3.480102737794875*^9}, {3.48010279852925*^9, 
+   3.4801028123105*^9}, 3.480102852419875*^9, {3.480103225763625*^9, 
+   3.480103235248*^9}, {3.48010329946675*^9, 3.480103389544875*^9}, {
+   3.48010343409175*^9, 3.48010345559175*^9}, {3.480103555388625*^9, 
+   3.4801035749355*^9}, {3.4801036280605*^9, 3.480103878919875*^9}, {
+   3.480103911888625*^9, 3.480103971982375*^9}, {3.480104006107375*^9, 
+   3.480104016826125*^9}, {3.480104085513625*^9, 3.480104120638625*^9}, {
+   3.480104181169875*^9, 3.480104206544875*^9}, {3.480104371607375*^9, 
+   3.4801043723105*^9}, {3.48010476715425*^9, 3.480104767638625*^9}, {
+   3.480105172248*^9, 3.4801051756855*^9}, {3.480105290607375*^9, 
+   3.48010529927925*^9}, {3.480105337107375*^9, 3.480105347513625*^9}, {
+   3.480105519982375*^9, 3.48010552709175*^9}, {3.480105590873*^9, 
+   3.4801056333105*^9}, {3.480105749888625*^9, 3.480105775388625*^9}, {
+   3.480106342763625*^9, 3.4801063724355*^9}, {3.48010712359175*^9, 
+   3.4801071345605*^9}, {3.480107395373*^9, 3.48010739859175*^9}, {
+   3.48010779609175*^9, 3.480107907873*^9}, {3.480107944044875*^9, 
+   3.48010794565425*^9}, {3.480108053076125*^9, 3.480108073623*^9}, {
+   3.4801081071855*^9, 3.48010811302925*^9}, {3.480108210419875*^9, 
+   3.48010824071675*^9}, {3.480108461919875*^9, 3.480108500138625*^9}, {
+   3.480108573732375*^9, 3.48010860959175*^9}, {3.480108649638625*^9, 
+   3.48010869971675*^9}, {3.4801087390605*^9, 3.480108740544875*^9}, {
+   3.480108775248*^9, 3.480108819794875*^9}, 3.48010885321675*^9, {
+   3.480109016123*^9, 3.480109077169875*^9}, {3.48025397784375*^9, 
+   3.480254009109375*^9}, {3.480254042375*^9, 3.48025404484375*^9}, {
+   3.480255495578125*^9, 3.480255590265625*^9}, 3.480255626390625*^9, {
+   3.4802557853125*^9, 3.4802559479375*^9}, {3.48025648671875*^9, 
+   3.4802565875625*^9}, {3.48025664471875*^9, 3.480256654921875*^9}, {
+   3.480256768921875*^9, 3.480256769484375*^9}, {3.480256831953125*^9, 
+   3.48025686925*^9}, {3.48025690425*^9, 3.480256931484375*^9}, {
+   3.48025697290625*^9, 3.480256989234375*^9}, {3.4802570409375*^9, 
+   3.480257064734375*^9}, {3.4802572395625*^9, 3.4802572453125*^9}, {
+   3.480258772359375*^9, 3.48025884584375*^9}, 3.480259043953125*^9, {
+   3.4803340828125*^9, 3.480334373296875*^9}, 3.480334438484375*^9, {
+   3.48033450428125*^9, 3.48033450765625*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["FitData[ ]", "Subsubsection",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480600569453125*^9, 3.48060059459375*^9}, {
+   3.48060080565625*^9, 3.48060082134375*^9}, {3.480601078546875*^9, 
+   3.48060108065625*^9}, 3.480601123734375*^9}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"FitData", "::", "notnumeric"}], " ", "=", 
+   RowBox[{
+   "\"\<The Expression to be fitted must produce a number value when \>\"", "<>",
+     "\[IndentingNewLine]", 
+    "\"\<evaluated for each X value in the data set using the starting \
+parameter values.\>\""}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FitData", "::", "badexpression"}], " ", "=", 
+   "\"\<Something about the syntax of the Expression argument is \
+wrong.\>\""}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FitData", "::", "badvariable"}], " ", "=", 
+   "\"\<The Variable argument must be a single symbol.\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FitData", "::", "badparameters"}], " ", "=", 
+   "\"\<The Parameters argument must be a list of symbols.\>\""}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{
+   RowBox[{"FitData", "::", "badstartvalues"}], " ", "=", 
+   RowBox[{
+   "\"\<The StartValues argument must evaluate to a list of numbers \>\"", "<>",
+     "\[IndentingNewLine]", 
+    "\"\<with the same length as the list of parameters.\>\""}]}], 
+  ";"}]}], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480601179234375*^9, 3.480601182765625*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{
+   RowBox[{"SetAttributes", "[", 
+    RowBox[{"FitData", ",", "HoldAll"}], "]"}], ";"}], 
+  "\[IndentingNewLine]"}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"FitData", "[", 
+   RowBox[{
+   "Expression_", ",", "Variable_", ",", "Parameters_List", ",", 
+    "StartValues_List"}], "]"}], ":=", "\[IndentingNewLine]", 
+  RowBox[{"Block", "[", "\[IndentingNewLine]", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"data", "=", 
+       RowBox[{"Transpose", "[", 
+        RowBox[{"{", 
+         RowBox[{"xx", ",", "yy"}], "}"}], "]"}]}], ",", "f", ",", "model", 
+      ",", "IteratedFit", ",", "init", ",", "wts", ",", "i"}], "}"}], ",", 
+    "\[IndentingNewLine]", "\[IndentingNewLine]", 
+    RowBox[{"(*", " ", 
+     RowBox[{
+     "Must", " ", "have", " ", "some", " ", "data", " ", "in", " ", "order", 
+      " ", "to", " ", "fit", " ", "it"}], " ", "*)"}], "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"!", 
+        RowBox[{"CurveFit`CheckLength", "[", "]"}]}], ",", " ", 
+       RowBox[{"Abort", "[", "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Clear", " ", "any", " ", "current", " ", "values", " ", "set", " ", 
+       "for", " ", "the", " ", "parameters", " ", "or", " ", "the", " ", 
+       "variable", " ", "and", " ", "check", " ", "the", " ", "arguments"}], 
+      " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Check", "[", 
+      RowBox[{
+       RowBox[{"ClearAll", "[", 
+        RowBox[{"Unevaluated", "[", "Variable", "]"}], "]"}], ",", 
+       RowBox[{
+        RowBox[{"Message", "[", 
+         RowBox[{"FitData", "::", "badvariable"}], "]"}], ";", 
+        RowBox[{"Abort", "[", "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Check", "[", 
+      RowBox[{
+       RowBox[{"ClearAll", "@@", 
+        RowBox[{"Unevaluated", "[", "Parameters", "]"}]}], ",", 
+       RowBox[{
+        RowBox[{"Message", "[", 
+         RowBox[{"FitData", "::", "badparameters"}], "]"}], ";", 
+        RowBox[{"Abort", "[", "]"}]}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Length", "[", "Parameters", "]"}], "==", 
+        RowBox[{"Length", "[", "StartValues", "]"}]}], ",", 
+       "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Message", "[", 
+         RowBox[{"FitData", "::", "badstartvalues"}], "]"}], ";", 
+        RowBox[{"Abort", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Message", "[", 
+         RowBox[{"FitData", "::", "badstartvalues"}], "]"}], ";", 
+        RowBox[{"Abort", "[", "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"NumberQ", "[", 
+        RowBox[{"Plus", "@@", "StartValues"}], "]"}], ",", 
+       "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Message", "[", 
+         RowBox[{"FitData", "::", "badstartvalues"}], "]"}], ";", 
+        RowBox[{"Abort", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Message", "[", 
+         RowBox[{"FitData", "::", "badstartvalues"}], "]"}], ";", 
+        RowBox[{"Abort", "[", "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"The", " ", "function", " ", "to", " ", "fit"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Head", "[", "Expression", "]"}], "===", "List"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{"f", "=", 
+        RowBox[{"Function", "[", 
+         RowBox[{"Parameters", ",", 
+          RowBox[{"Function", "[", 
+           RowBox[{
+            RowBox[{"{", "Variable", "}"}], ",", 
+            RowBox[{"First", "[", "Expression", "]"}]}], "]"}]}], "]"}]}], 
+       ",", "\[IndentingNewLine]", 
+       RowBox[{"f", "=", 
+        RowBox[{"Function", "[", 
+         RowBox[{"Parameters", ",", 
+          RowBox[{"Function", "[", 
+           RowBox[{
+            RowBox[{"{", "Variable", "}"}], ",", "Expression"}], "]"}]}], 
+         "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Check", " ", "that", " ", "the", " ", "function", " ", "can", " ", 
+       "be", " ", "used", " ", "to", " ", "generate", " ", "numerical", " ", 
+       "results"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{"NumberQ", "[", 
+        RowBox[{"Check", "[", 
+         RowBox[{
+          RowBox[{"Plus", "@@", 
+           RowBox[{"(", 
+            RowBox[{
+             RowBox[{"(", 
+              RowBox[{"f", "@@", "StartValues"}], ")"}], "/@", 
+             "CurveFit`xx"}], ")"}]}], ",", 
+          RowBox[{
+           RowBox[{"Message", "[", 
+            RowBox[{"FitData", "::", "badexpression"}], "]"}], ";", 
+           RowBox[{"Abort", "[", "]"}]}]}], "]"}], "]"}], ",", 
+       "\[IndentingNewLine]", ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Message", "[", 
+         RowBox[{"FitData", "::", "notnumeric"}], "]"}], ";", 
+        RowBox[{"Abort", "[", "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Message", "[", 
+         RowBox[{"FitData", "::", "notnumeric"}], "]"}], ";", 
+        RowBox[{"Abort", "[", "]"}]}]}], "\[IndentingNewLine]", "]"}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+       RowBox[{"the", " ", "function", " ", "seems", " ", "ok"}], ",", " ", 
+       RowBox[{"so", " ", "get", " ", "started"}]}], " ", "*)"}], 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Clear", " ", "CurveFit", " ", "fitting", " ", "parameters", " ", "and",
+        " ", "results"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Clear", "[", 
+      RowBox[{
+      "CurveFit`fY", ",", "CurveFit`Private`funct", ",", 
+       "CurveFit`Private`yff", ",", "CurveFit`Private`ssy"}], "]"}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "a", " ", "printable", " ", "form", " ", "of", " ", "the", " ", 
+       "symbolic", " ", "function", " ", "expression"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"CurveFit`Private`funct", "=", 
+      RowBox[{"Row", "[", 
+       RowBox[{"{", 
+        RowBox[{"\"\<f[\>\"", ",", "Variable", ",", "\"\<] = \>\"", ",", 
+         RowBox[{"DisplayForm", "[", 
+          RowBox[{"ToBoxes", "[", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"f", "@@", "Parameters"}], ")"}], "[", "Variable", "]"}],
+            "]"}], "]"}]}], "}"}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", 
+      RowBox[{
+      "\"\<\\nn = \>\"", ",", " ", "CurveFit`n", ",", "\"\<\\np = \>\"", ",", 
+       " ", 
+       RowBox[{"Length", "[", "Parameters", "]"}]}], "]"}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", "CurveFit`Private`funct", "]"}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Unweighted", " ", "fit"}], " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", 
+      RowBox[{"\"\<\\n\>\"", ",", 
+       RowBox[{"Style", "[", 
+        RowBox[{
+        "\"\<Fit of (x,y)  (unweighted):\>\"", ",", "Bold", ",", "Italic"}], 
+        "]"}]}], "]"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"model", " ", "=", " ", 
+      RowBox[{"Quiet", "[", "\[IndentingNewLine]", 
+       RowBox[{"NonlinearModelFit", "[", "\[IndentingNewLine]", 
+        RowBox[{
+        "data", ",", "\[IndentingNewLine]", "Expression", ",", 
+         "\[IndentingNewLine]", 
+         RowBox[{"Transpose", "[", 
+          RowBox[{"{", 
+           RowBox[{"Parameters", ",", "StartValues"}], "}"}], "]"}], ",", 
+         "\[IndentingNewLine]", "Variable"}], "\[IndentingNewLine]", "]"}], 
+       "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"CurveFit`Private`results", "=", "\[IndentingNewLine]", 
+      RowBox[{"FormattedResults", "[", "\[IndentingNewLine]", 
+       RowBox[{"Parameters", ",", "\[IndentingNewLine]", 
+        RowBox[{"(", 
+         RowBox[{"Parameters", "/.", 
+          RowBox[{"Quiet", "[", 
+           RowBox[{"model", "[", "\"\<BestFitParameters\>\"", "]"}], "]"}]}], 
+         ")"}], ",", "\[IndentingNewLine]", 
+        RowBox[{"Quiet", "[", 
+         RowBox[{"model", "[", "\"\<ParameterErrors\>\"", "]"}], "]"}], ",", 
+        "\[IndentingNewLine]", "\"\<Std. Deviation = \>\"", ",", 
+        "\[IndentingNewLine]", 
+        SqrtBox[
+         RowBox[{"Quiet", "[", 
+          RowBox[{"model", "[", "\"\<EstimatedVariance\>\"", "]"}], "]"}]]}], 
+       "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"CurveFit`Private`ssy", "=", 
+      RowBox[{"0", " ", "sy"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Print", "[", "CurveFit`Private`results", "]"}], ";", 
+     "\[IndentingNewLine]", "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Fit", " ", "using", " ", "Y", " ", "errors", " ", "only"}], 
+      " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Min", "[", "CurveFit`sy", "]"}], ">", "0"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Print", "[", 
+         RowBox[{"\"\<\\n\>\"", ",", 
+          RowBox[{"Style", "[", 
+           RowBox[{
+           "\"\<Fit of (x,y\[PlusMinus]\!\(\*SubscriptBox[\(\[Sigma]\), \
+\(y\)]\)):\>\"", ",", "Bold", ",", "Italic"}], "]"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"model", " ", "=", " ", 
+         RowBox[{"Quiet", "[", "\[IndentingNewLine]", 
+          RowBox[{"NonlinearModelFit", "[", "\[IndentingNewLine]", 
+           RowBox[{
+           "data", ",", "\[IndentingNewLine]", "Expression", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"Transpose", "[", 
+             RowBox[{"{", 
+              RowBox[{"Parameters", ",", "StartValues"}], "}"}], "]"}], ",", 
+            "\[IndentingNewLine]", "Variable", ",", "\[IndentingNewLine]", 
+            RowBox[{"Weights", "\[Rule]", 
+             RowBox[{"1", "/", 
+              SuperscriptBox["CurveFit`sy", "2"]}]}], ",", 
+            RowBox[{"VarianceEstimatorFunction", "\[Rule]", 
+             RowBox[{"(", 
+              RowBox[{"1", "&"}], ")"}]}]}], "\[IndentingNewLine]", "]"}], 
+          "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"CurveFit`Private`results", "=", "\[IndentingNewLine]", 
+         RowBox[{"FormattedResults", "[", "\[IndentingNewLine]", 
+          RowBox[{"Parameters", ",", "\[IndentingNewLine]", 
+           RowBox[{"(", 
+            RowBox[{"Parameters", "/.", 
+             RowBox[{"Quiet", "[", 
+              RowBox[{"model", "[", "\"\<BestFitParameters\>\"", "]"}], 
+              "]"}]}], ")"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Quiet", "[", 
+            RowBox[{"model", "[", "\"\<ParameterErrors\>\"", "]"}], "]"}], 
+           ",", "\[IndentingNewLine]", 
+           TagBox[
+            
+            StyleBox[
+             "\"\<\\!\\(\\*FractionBox[SuperscriptBox[\\(\\[Chi]\\), \
+\\(2\\)], \\(n - p\\)]\\) = \>\"",
+             ShowSpecialCharacters->False,
+             ShowStringCharacters->True,
+             NumberMarks->True],
+            FullForm], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"Plus", "@@", 
+              RowBox[{"(", 
+               RowBox[{
+                SuperscriptBox[
+                 RowBox[{"Quiet", "[", 
+                  RowBox[{"model", "[", "\"\<FitResiduals\>\"", "]"}], "]"}], 
+                 "2"], "/", 
+                SuperscriptBox["CurveFit`sy", "2"]}], ")"}]}], ")"}], "/", 
+            RowBox[{"(", 
+             RowBox[{"CurveFit`n", "-", 
+              RowBox[{"Length", "[", "Parameters", "]"}]}], ")"}]}]}], 
+          "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"CurveFit`Private`ssy", "=", "sy"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", "CurveFit`Private`results", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{
+      "Fit", " ", "using", " ", "Y", " ", "and", " ", "X", " ", "errors"}], 
+      " ", "*)"}], "\[IndentingNewLine]", 
+     RowBox[{"If", "[", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Min", "[", "CurveFit`sx", "]"}], ">", "0"}], ",", 
+       "\[IndentingNewLine]", 
+       RowBox[{
+        RowBox[{"Print", "[", 
+         RowBox[{"\"\<\\n\>\"", ",", 
+          RowBox[{"Style", "[", 
+           RowBox[{
+           "\"\<Fit of (x\[PlusMinus]\!\(\*SubscriptBox[\(\[Sigma]\), \
+\(x\)]\),y\[PlusMinus]\!\(\*SubscriptBox[\(\[Sigma]\), \(y\)]\)):\>\"", ",", 
+            "Bold", ",", "Italic"}], "]"}]}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{
+         RowBox[{"IteratedFit", "[", "___", "]"}], ":=", 
+         "\[IndentingNewLine]", 
+         RowBox[{"(", "\[IndentingNewLine]", 
+          RowBox[{
+           RowBox[{"i", "++"}], ";", "\[IndentingNewLine]", 
+           RowBox[{"init", "=", 
+            RowBox[{"(", 
+             RowBox[{"Parameters", "/.", 
+              RowBox[{"Quiet", "[", 
+               RowBox[{"model", "[", "\"\<BestFitParameters\>\"", "]"}], 
+               "]"}]}], ")"}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"wts", " ", "=", 
+            RowBox[{"1", "/", 
+             RowBox[{"(", 
+              RowBox[{
+               SuperscriptBox["CurveFit`sy", "2"], "+", 
+               SuperscriptBox[
+                RowBox[{"(", 
+                 RowBox[{
+                  RowBox[{
+                   RowBox[{
+                    RowBox[{"Quiet", "[", 
+                    RowBox[{"model", "[", "\"\<Function\>\"", "]"}], "]"}], 
+                    "'"}], "[", "CurveFit`xx", "]"}], " ", "CurveFit`sx"}], 
+                 ")"}], "2"]}], ")"}]}]}], ";", "\[IndentingNewLine]", 
+           RowBox[{"model", " ", "=", " ", 
+            RowBox[{"Quiet", "[", "\[IndentingNewLine]", 
+             RowBox[{"NonlinearModelFit", "[", "\[IndentingNewLine]", 
+              RowBox[{
+              "data", ",", "\[IndentingNewLine]", "Expression", ",", 
+               "\[IndentingNewLine]", 
+               RowBox[{"Transpose", "[", 
+                RowBox[{"{", 
+                 RowBox[{"Parameters", ",", "init"}], "}"}], "]"}], ",", 
+               "\[IndentingNewLine]", "Variable", ",", "\[IndentingNewLine]", 
+               RowBox[{"Weights", "\[Rule]", "wts"}]}], "\[IndentingNewLine]",
+               "]"}], "\[IndentingNewLine]", "]"}]}], ";", 
+           "\[IndentingNewLine]", 
+           RowBox[{"Quiet", "[", 
+            RowBox[{"model", "[", "\"\<EstimatedVariance\>\"", "]"}], "]"}]}],
+           "\[IndentingNewLine]", ")"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"i", "=", "0"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"FixedPoint", "[", 
+         RowBox[{"IteratedFit", ",", 
+          RowBox[{"IteratedFit", "[", "]"}], ",", "10"}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"model", " ", "=", " ", 
+         RowBox[{"Quiet", "[", "\[IndentingNewLine]", 
+          RowBox[{"NonlinearModelFit", "[", "\[IndentingNewLine]", 
+           RowBox[{
+           "data", ",", "\[IndentingNewLine]", "Expression", ",", 
+            "\[IndentingNewLine]", 
+            RowBox[{"Transpose", "[", 
+             RowBox[{"{", 
+              RowBox[{"Parameters", ",", "init"}], "}"}], "]"}], ",", 
+            "\[IndentingNewLine]", "Variable", ",", "\[IndentingNewLine]", 
+            RowBox[{"Weights", "\[Rule]", "wts"}], ",", 
+            RowBox[{"VarianceEstimatorFunction", "\[Rule]", 
+             RowBox[{"(", 
+              RowBox[{"1", "&"}], ")"}]}], ",", 
+            RowBox[{"MaxIterations", "\[Rule]", "1"}]}], 
+           "\[IndentingNewLine]", "]"}], "\[IndentingNewLine]", "]"}]}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"CurveFit`Private`results", "=", "\[IndentingNewLine]", 
+         RowBox[{"FormattedResults", "[", "\[IndentingNewLine]", 
+          RowBox[{"Parameters", ",", "\[IndentingNewLine]", 
+           RowBox[{"(", 
+            RowBox[{"Parameters", "/.", 
+             RowBox[{"Quiet", "[", 
+              RowBox[{"model", "[", "\"\<BestFitParameters\>\"", "]"}], 
+              "]"}]}], ")"}], ",", "\[IndentingNewLine]", 
+           RowBox[{"Quiet", "[", 
+            RowBox[{"model", "[", "\"\<ParameterErrors\>\"", "]"}], "]"}], 
+           ",", "\[IndentingNewLine]", 
+           TagBox[
+            
+            StyleBox[
+             "\"\<\\!\\(\\*FractionBox[SuperscriptBox[\\(\\[Chi]\\), \
+\\(2\\)], \\(n - p\\)]\\) = \>\"",
+             ShowSpecialCharacters->False,
+             ShowStringCharacters->True,
+             NumberMarks->True],
+            FullForm], ",", "\[IndentingNewLine]", 
+           RowBox[{
+            RowBox[{"(", 
+             RowBox[{"Plus", "@@", 
+              RowBox[{"(", 
+               RowBox[{
+                SuperscriptBox[
+                 RowBox[{"Quiet", "[", 
+                  RowBox[{"model", "[", "\"\<FitResiduals\>\"", "]"}], "]"}], 
+                 "2"], " ", "wts"}], ")"}]}], ")"}], "/", 
+            RowBox[{"(", 
+             RowBox[{"CurveFit`n", "-", 
+              RowBox[{"Length", "[", "Parameters", "]"}]}], ")"}]}]}], 
+          "\[IndentingNewLine]", "]"}]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"CurveFit`Private`ssy", "=", 
+         SqrtBox["wts"]}], ";", "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", 
+         RowBox[{
+         "\"\<   (required \>\"", ",", "i", ",", 
+          "\"\< calls of NonlinearModelFit to converge)\>\""}], "]"}], ";", 
+        "\[IndentingNewLine]", 
+        RowBox[{"Print", "[", "CurveFit`Private`results", "]"}], ";"}]}], 
+      "\[IndentingNewLine]", "]"}], ";", "\[IndentingNewLine]", 
+     "\[IndentingNewLine]", 
+     RowBox[{"(*", " ", 
+      RowBox[{"Set", " ", "the", " ", "final", " ", "results"}], " ", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"CurveFit`fY", "=", 
+      RowBox[{"Function", "[", 
+       RowBox[{
+        RowBox[{"{", "x", "}"}], ",", 
+        RowBox[{"Evaluate", "[", 
+         RowBox[{
+          RowBox[{"model", "[", "\"\<Function\>\"", "]"}], "[", "x", "]"}], 
+         "]"}]}], "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"CurveFit`Private`yff", "[", "x_", "]"}], ":=", 
+      RowBox[{"CurveFit`fY", "[", "x", "]"}]}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Model", " ", "=", " ", "model"}], ";", "\[IndentingNewLine]", 
+     RowBox[{"Quiet", "[", 
+      RowBox[{"model", "[", "\"\<BestFitParameters\>\"", "]"}], "]"}]}]}], 
+   "\[IndentingNewLine]", "]"}]}]}], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.47983112590425*^9, 3.479831180326125*^9}, {
+   3.47983121246675*^9, 3.479831243748*^9}, {3.479831292763625*^9, 
+   3.47983156315425*^9}, {3.479831607794875*^9, 3.479831701857375*^9}, {
+   3.47983174859175*^9, 3.4798318703105*^9}, {3.4798446810605*^9, 
+   3.479844733451125*^9}, {3.479909744638625*^9, 3.47990995790425*^9}, {
+   3.479910352169875*^9, 3.4799103823105*^9}, 3.479913505498*^9, 
+   3.47992194771675*^9, {3.480080896419875*^9, 3.48008098327925*^9}, {
+   3.48008101496675*^9, 3.480081041513625*^9}, {3.480081289138625*^9, 
+   3.480081329623*^9}, {3.480081360638625*^9, 3.480081363748*^9}, {
+   3.480081399888625*^9, 3.4800814370605*^9}, 3.480081483373*^9, {
+   3.480081580169875*^9, 3.4800815825605*^9}, {3.480081690419875*^9, 
+   3.480081693544875*^9}, 3.480081740623*^9, {3.48008179646675*^9, 
+   3.48008187759175*^9}, {3.480102081373*^9, 3.480102086826125*^9}, {
+   3.480102486998*^9, 3.48010250952925*^9}, 3.480103160857375*^9, {
+   3.480104247919875*^9, 3.480104300607375*^9}, {3.48010433565425*^9, 
+   3.48010434721675*^9}, {3.480104733123*^9, 3.480104749998*^9}, {
+   3.480104844388625*^9, 3.480104855576125*^9}, {3.480104931513625*^9, 
+   3.48010493534175*^9}, {3.48010504865425*^9, 3.480105115763625*^9}, 
+   3.480105442373*^9, {3.480106462544875*^9, 3.480106474248*^9}, {
+   3.480106505951125*^9, 3.480106508701125*^9}, {3.480106587513625*^9, 
+   3.480106653513625*^9}, 3.48010674052925*^9, {3.480106810669875*^9, 
+   3.480106835013625*^9}, {3.480106970826125*^9, 3.480106971498*^9}, {
+   3.48010701121675*^9, 3.48010711052925*^9}, {3.48010718427925*^9, 
+   3.480107193857375*^9}, {3.480107234576125*^9, 3.480107250482375*^9}, {
+   3.48010729971675*^9, 3.480107300294875*^9}, {3.4801074285605*^9, 
+   3.480107538919875*^9}, {3.48010853121675*^9, 3.480108533638625*^9}, {
+   3.480254151734375*^9, 3.480254167546875*^9}, {3.480254243921875*^9, 
+   3.480254285125*^9}, {3.480254328046875*^9, 3.480254422953125*^9}, {
+   3.480254567484375*^9, 3.48025457146875*^9}, {3.4802548253125*^9, 
+   3.48025488121875*^9}, 3.480254938171875*^9, {3.48025502453125*^9, 
+   3.480255064921875*^9}, {3.48025515728125*^9, 3.48025517434375*^9}, {
+   3.480255218734375*^9, 3.480255330265625*^9}, {3.480255388140625*^9, 
+   3.4802553913125*^9}, {3.480255427421875*^9, 3.48025543484375*^9}, {
+   3.480256062421875*^9, 3.480256078078125*^9}, {3.480257150828125*^9, 
+   3.48025717475*^9}, 3.48025721875*^9, {3.480257529203125*^9, 
+   3.480257592203125*^9}, {3.480257653703125*^9, 3.480257916515625*^9}, {
+   3.480257968234375*^9, 3.48025804109375*^9}, {3.480258116984375*^9, 
+   3.4802581465*^9}, {3.480258185375*^9, 3.480258185953125*^9}, {
+   3.480258224484375*^9, 3.480258238640625*^9}, {3.4802582915*^9, 
+   3.4802582916875*^9}, {3.4802583336875*^9, 3.480258359453125*^9}, {
+   3.480258389859375*^9, 3.48025841215625*^9}, {3.480258521515625*^9, 
+   3.480258632796875*^9}, {3.480258695703125*^9, 3.480258714296875*^9}, {
+   3.480258870015625*^9, 3.480258918265625*^9}, {3.480258950890625*^9, 
+   3.480258956125*^9}, {3.480258988953125*^9, 3.4802589905*^9}, {
+   3.4802590735*^9, 3.48025907925*^9}, {3.480262668859375*^9, 
+   3.48026267125*^9}, {3.48026271578125*^9, 3.48026288834375*^9}, {
+   3.480262936*^9, 3.480263077859375*^9}, {3.4802631303125*^9, 
+   3.480263145578125*^9}, {3.480263204515625*^9, 3.4802632379375*^9}, {
+   3.480263301609375*^9, 3.480263430953125*^9}, {3.48026368546875*^9, 
+   3.480263800328125*^9}, {3.48026385834375*^9, 3.4802638885*^9}, {
+   3.480263953671875*^9, 3.480263971765625*^9}, {3.480264013875*^9, 
+   3.4802640773125*^9}, {3.480264121390625*^9, 3.480264171265625*^9}, {
+   3.480264299109375*^9, 3.4802644491875*^9}, {3.480264484671875*^9, 
+   3.4802649015625*^9}, {3.480265119625*^9, 3.480265121203125*^9}, {
+   3.480265160984375*^9, 3.48026517065625*^9}, {3.48026520515625*^9, 
+   3.480265209953125*^9}, {3.48033296609375*^9, 3.480333030375*^9}, {
+   3.48033442125*^9, 3.480334498046875*^9}, {3.48033454934375*^9, 
+   3.4803346095625*^9}, {3.4803346649375*^9, 3.48033471190625*^9}, {
+   3.480334764953125*^9, 3.4803348313125*^9}, {3.480334863953125*^9, 
+   3.480334900671875*^9}, 3.480334967125*^9, {3.48033508378125*^9, 
+   3.480335106953125*^9}, {3.48033516584375*^9, 3.480335243171875*^9}, 
+   3.480335275921875*^9, {3.480335513703125*^9, 3.48033552375*^9}, {
+   3.4803355999375*^9, 3.480335616546875*^9}, {3.48033575984375*^9, 
+   3.48033580928125*^9}, 3.480335849421875*^9, {3.4803360164375*^9, 
+   3.4803360180625*^9}, {3.480336089*^9, 3.4803360895625*^9}, {
+   3.480336137921875*^9, 3.4803362468125*^9}, {3.480336296265625*^9, 
+   3.48033637840625*^9}, 3.480426443796875*^9, 3.48060116534375*^9, {
+   3.480601719390625*^9, 3.480601727078125*^9}, {3.48060209990625*^9, 
+   3.480602111328125*^9}, {3.480602442375*^9, 3.480602513328125*^9}, {
+   3.480603425078125*^9, 3.48060347365625*^9}, {3.48060353784375*^9, 
+   3.480603559125*^9}, {3.480680825484375*^9, 3.480680900484375*^9}, 
+   3.480681081953125*^9, {3.480681129796875*^9, 3.48068113184375*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"End", "[", "]"}], ";"}], " ", 
+  RowBox[{"(*", " ", "CurveFit`Private`", " ", "*)"}]}]], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.48060165078125*^9, 3.480601695078125*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"End", "[", "]"}], ";"}], " ", 
+  RowBox[{"(*", " ", "CurveFit`", " ", "*)"}]}]], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.48060165078125*^9, 3.4806016923125*^9}}]
+}, Open  ]]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "New ",
+ StyleBox["CurveFit",
+  FontSlant->"Italic"],
+ " Function Descriptions"
+}], "Section",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480607676671875*^9, 3.48060767853125*^9}, {
+  3.480607846375*^9, 3.4806078518125*^9}, {3.48060853384375*^9, 
+  3.4806085374375*^9}}],
+
+Cell[BoxData[
+ RowBox[{"?", "FitData"}]], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.4806077574375*^9, 3.480607760765625*^9}},
+ CellTags->"FitData Info"],
+
+Cell[TextData[ButtonBox["Return to Contents",
+ BaseStyle->"Hyperlink",
+ ButtonData->"Contents"]], "Text",
+ CellChangeTimes->{{3.48061015653125*^9, 3.480610190609375*^9}}],
+
+Cell[BoxData[
+ RowBox[{"?", "Model"}]], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480607766515625*^9, 3.480607776328125*^9}},
+ CellTags->"Model Info"],
+
+Cell[TextData[ButtonBox["Return to Contents",
+ BaseStyle->"Hyperlink",
+ ButtonData->"Contents"]], "Text",
+ CellChangeTimes->{{3.48061015653125*^9, 3.480610190609375*^9}}],
+
+Cell[BoxData[
+ RowBox[{"?", "ChiSquared"}]], "Input",
+ InitializationGroup->True,
+ CellChangeTimes->{{3.480607779296875*^9, 3.48060778703125*^9}},
+ CellTags->"ChiSquared Info"],
+
+Cell[TextData[ButtonBox["Return to Contents",
+ BaseStyle->"Hyperlink",
+ ButtonData->"Contents"]], "Text",
+ CellChangeTimes->{{3.48061015653125*^9, 3.480610190609375*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Example:\nfit a function to the data in the ",
+ StyleBox["CurveFit",
+  FontSlant->"Italic"],
+ " sample file \"",
+ "decaying sinusoid",
+ ".dat\""
+}], "Section",
+ CellChangeTimes->{{3.480607676671875*^9, 3.48060767853125*^9}, {
+   3.480607800890625*^9, 3.480607803125*^9}, {3.480612771828125*^9, 
+   3.480612864046875*^9}, 3.629485398540354*^9},
+ CellTags->"Example"],
+
+Cell[CellGroupData[{
+
+Cell["Load the file data", "Subsection",
+ CellChangeTimes->{{3.48061585215625*^9, 3.48061585553125*^9}, {
+  3.48061589584375*^9, 3.48061592359375*^9}}],
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"FileNameJoin", "[", 
+   RowBox[{"{", 
+    RowBox[{
+    "$UserDocumentsDirectory", ",", "\"\<CurveFit\>\"", ",", 
+     "\"\<Sample Data\>\"", ",", "\"\<decaying sinusoid.dat\>\""}], "}"}], 
+   "]"}], " "}], "\[IndentingNewLine]", 
+ RowBox[{"LoadFile", "[", "%", "]"}]}], "Input",
+ CellChangeTimes->{{3.480615672390625*^9, 3.4806157103125*^9}, {
+   3.48061577625*^9, 3.480615836859375*^9}, {3.48061596315625*^9, 
+   3.480615972125*^9}, {3.48068222296875*^9, 3.480682271375*^9}, 
+   3.629485408415171*^9}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+Remove the first few cycles, since they are too close to the transient pulse \
+which excited the ringing.\
+\>", "Subsubsection",
+ CellChangeTimes->{{3.480617408171875*^9, 3.48061745975*^9}, 
+   3.629486251246252*^9}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"XRangeRemove", "[", 
+   RowBox[{
+    RowBox[{"-", "0.0205"}], ",", "0.1255"}], "]"}], " "}]], "Input",
+ CellChangeTimes->{{3.6294861497368736`*^9, 3.6294861536368804`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Call FitData", "Subsection",
+ CellChangeTimes->{{3.48061585215625*^9, 3.48061585553125*^9}, {
+  3.48061589584375*^9, 3.48061592359375*^9}, {3.480616079328125*^9, 
+  3.4806160834375*^9}}],
+
+Cell[TextData[{
+ "Four arguments must be provided in the call to ",
+ StyleBox["FitData[ ]", "Input"],
+ " :\n(1) an expression for the function model to fit, which has a single \
+independent variable and some parameters\n(2) the symbol for the independent \
+variable you used in argument (1)\n(3) a list of symbols for the parameters \
+in the expression, enclosed in braces {..}\n(4) a list of starting values for \
+the parameters, also enclosed in braces {..}\n\nEach argument is separated \
+from the next by a comma."
+}], "Text",
+ CellChangeTimes->{{3.4806167489375*^9, 3.4806169799375*^9}, {
+  3.4806170119375*^9, 3.480617077578125*^9}, {3.480617165328125*^9, 
+  3.480617250671875*^9}, {3.48061728134375*^9, 3.480617287171875*^9}, {
+  3.480617342*^9, 3.480617363203125*^9}, {3.629486298888736*^9, 
+  3.6294862998403373`*^9}, {3.6294863633012486`*^9, 3.6294863904920964`*^9}}],
+
+Cell[TextData[{
+ "In this example we fit the data to the transient response of a ",
+ Cell[BoxData[
+  FormBox[
+   SuperscriptBox["2", "nd"], TraditionalForm]]],
+ "-order system (damped harmonic oscillator) which has parameters for the \
+intial amplitude (",
+ StyleBox["A", "Input"],
+ "), ringing frequency (",
+ StyleBox["fo", "Input"],
+ ") in kilohertz, phase (",
+ StyleBox["\[Phi]", "Input"],
+ ") in degrees, decay time constant (",
+ StyleBox["\[Tau]", "Input"],
+ ") in milliseconds, and a constant offset (",
+ StyleBox["c", "Input"],
+ "). The independent variable is the time (",
+ StyleBox["t", "Input"],
+ ") in milliseconds."
+}], "Text",
+ CellChangeTimes->{{3.480617408171875*^9, 3.48061745975*^9}, {
+  3.6294865118915095`*^9, 3.6294868432360916`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"FitData", "[", "\[IndentingNewLine]", " ", 
+  RowBox[{"(*", " ", 
+   RowBox[{
+   "The", " ", "expression", " ", "defining", " ", "the", " ", "function"}], 
+   " ", "*)"}], " ", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"A", " ", 
+     RowBox[{"Sin", "[", 
+      RowBox[{
+       RowBox[{"2", " ", "Pi", " ", "fo", " ", "t"}], " ", "-", " ", 
+       RowBox[{"\[Phi]", " ", "Degree"}]}], "]"}], 
+     RowBox[{"Exp", "[", 
+      RowBox[{
+       RowBox[{"-", "t"}], "/", "\[Tau]"}], "]"}]}], "+", "c"}], ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "The", " ", "symbol", " ", "for", " ", "the", " ", "variable", " ", "in", 
+     " ", "the", " ", "expression"}], " ", "*)"}], " ", "t", ",", 
+   "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "A", " ", "list", " ", "of", " ", "the", " ", "parameters", " ", "in", 
+     " ", "the", " ", "function", " ", "to", " ", "fit"}], " ", "*)"}], " ", 
+   RowBox[{"{", 
+    RowBox[{
+    "A", ",", "fo", " ", ",", "\[Phi]", ",", "\[Tau]", " ", ",", "c"}], " ", 
+    "}"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"(*", " ", 
+    RowBox[{
+    "A", " ", "list", " ", "of", " ", "starting", " ", "values", " ", "for", 
+     " ", "the", " ", "parameters"}], " ", "*)"}], " ", 
+   RowBox[{"{", 
+    RowBox[{"1.4", ",", "16.5", " ", ",", "10", " ", ",", "0.3", ",", "0"}], 
+    " ", "}"}]}], "\[IndentingNewLine]", "]"}]], "Input",
+ CellChangeTimes->{{3.480616089125*^9, 3.480616093828125*^9}, {
+   3.480616206734375*^9, 3.480616697265625*^9}, {3.48068027146875*^9, 
+   3.480680346828125*^9}, 3.629485461829665*^9, {3.629485510642151*^9, 
+   3.6294855896718893`*^9}, {3.6294856807604494`*^9, 3.629485684816457*^9}, {
+   3.6294857712874084`*^9, 3.6294857728630114`*^9}, {3.6294858057322693`*^9, 
+   3.629485865417974*^9}, {3.62948687657335*^9, 3.6294868794905553`*^9}}],
+
+Cell["As you see, the result is calculated quite quickly.", "Text",
+ CellChangeTimes->{{3.480617571109375*^9, 3.4806175895*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Plot the fit results", "Subsection",
+ CellChangeTimes->{{3.48061585215625*^9, 3.48061585553125*^9}, {
+  3.48061589584375*^9, 3.48061592359375*^9}, {3.480616079328125*^9, 
+  3.4806160834375*^9}, {3.48061763046875*^9, 3.480617640734375*^9}}],
+
+Cell[BoxData[
+ RowBox[{"LinearDifferencePlot", "[", 
+  RowBox[{"Joined", "\[Rule]", "False"}], "]"}]], "Input",
+ CellChangeTimes->{{3.480617644921875*^9, 3.480617650984375*^9}, 
+   3.6294860716743364`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Move back to the title line", "Section",
+ CellFrame->{{0, 0}, {0, 0.5}},
+ CellChangeTimes->{{3.48061585215625*^9, 3.48061585553125*^9}, {
+  3.48061589584375*^9, 3.48061592359375*^9}, {3.480616079328125*^9, 
+  3.4806160834375*^9}, {3.48061763046875*^9, 3.480617640734375*^9}, {
+  3.4806176904375*^9, 3.480617717140625*^9}, {3.480703198546875*^9, 
+  3.480703232875*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"NotebookLocate", "[", "\"\<Title\>\"", "]"}], ";"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.480681578390625*^9, 3.480681580359375*^9}, 
+   3.48068161046875*^9, {3.480681652828125*^9, 3.480681653875*^9}, {
+   3.480681819609375*^9, 3.480681866375*^9}, {3.48068200415625*^9, 
+   3.480682010390625*^9}, 3.48070320953125*^9}]
+}, Open  ]]
+}, Open  ]]
+},
+AutoGeneratedPackage->None,
+Saveable->False,
+InitializationCellEvaluation->True,
+WindowSize->{679, 871},
+WindowMargins->{{Automatic, 590}, {Automatic, 32}},
+ShowSelection->True,
+FrontEndVersion->"7.0 for Microsoft Windows (64-bit) (February 18, 2009)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "Title"->{
+  Cell[567, 22, 377, 13, 50, "Subtitle",
+   CellTags->"Title"]},
+ "Contents"->{
+  Cell[2942, 93, 171, 7, 53, "Subsection",
+   CellTags->"Contents"]},
+ "FitData Info"->{
+  Cell[51467, 1221, 169, 4, 31, "Input",
+   InitializationGroup->True,
+   CellTags->"FitData Info"]},
+ "Model Info"->{
+  Cell[51812, 1232, 167, 4, 31, "Input",
+   InitializationGroup->True,
+   CellTags->"Model Info"]},
+ "ChiSquared Info"->{
+  Cell[52155, 1243, 176, 4, 31, "Input",
+   InitializationGroup->True,
+   CellTags->"ChiSquared Info"]},
+ "Example"->{
+  Cell[52541, 1257, 383, 11, 123, "Section",
+   CellTags->"Example"]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"Title", 59685, 1452},
+ {"Contents", 59765, 1455},
+ {"FitData Info", 59854, 1458},
+ {"Model Info", 59973, 1462},
+ {"ChiSquared Info", 60095, 1466},
+ {"Example", 60214, 1470}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[567, 22, 377, 13, 50, "Subtitle",
+ CellTags->"Title"],
+Cell[947, 37, 692, 17, 83, "Text"],
+Cell[1642, 56, 791, 18, 83, "Text"],
+Cell[2436, 76, 481, 13, 47, "Text"],
+Cell[CellGroupData[{
+Cell[2942, 93, 171, 7, 53, "Subsection",
+ CellTags->"Contents"],
+Cell[CellGroupData[{
+Cell[3138, 104, 170, 2, 27, "Subsubsection"],
+Cell[3311, 108, 372, 12, 65, "Text"]
+}, Open  ]],
+Cell[3698, 123, 215, 4, 27, "Subsubsection"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3950, 132, 234, 7, 71, "Section",
+ InitializationGroup->True],
+Cell[4187, 141, 162, 4, 31, "Input",
+ InitializationGroup->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4386, 150, 177, 3, 71, "Section",
+ InitializationGroup->True],
+Cell[CellGroupData[{
+Cell[4588, 157, 153, 2, 36, "Subsection",
+ InitializationGroup->True],
+Cell[4744, 161, 231, 5, 31, "Input",
+ InitializationGroup->True],
+Cell[4978, 168, 2719, 57, 212, "Input",
+ InitializationGroup->True],
+Cell[7700, 227, 8182, 208, 892, "Input",
+ InitializationGroup->True],
+Cell[15885, 437, 2458, 50, 492, "Input",
+ InitializationGroup->True]
+}, Closed]],
+Cell[CellGroupData[{
+Cell[18380, 492, 197, 3, 28, "Subsection",
+ InitializationGroup->True],
+Cell[18580, 497, 277, 6, 31, "Input",
+ InitializationGroup->True],
+Cell[CellGroupData[{
+Cell[18882, 507, 226, 4, 27, "Subsubsection",
+ InitializationGroup->True],
+Cell[19111, 513, 1374, 39, 239, "Input",
+ InitializationGroup->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20522, 557, 319, 5, 27, "Subsubsection",
+ InitializationGroup->True],
+Cell[20844, 564, 4201, 77, 352, "Input",
+ InitializationGroup->True]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[25082, 646, 247, 4, 27, "Subsubsection",
+ InitializationGroup->True],
+Cell[25332, 652, 1275, 33, 252, "Input",
+ InitializationGroup->True],
+Cell[26610, 687, 24029, 500, 3187, "Input",
+ InitializationGroup->True],
+Cell[50642, 1189, 237, 6, 31, "Input",
+ InitializationGroup->True],
+Cell[50882, 1197, 227, 6, 31, "Input",
+ InitializationGroup->True]
+}, Open  ]]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[51170, 1210, 294, 9, 71, "Section",
+ InitializationGroup->True],
+Cell[51467, 1221, 169, 4, 31, "Input",
+ InitializationGroup->True,
+ CellTags->"FitData Info"],
+Cell[51639, 1227, 170, 3, 29, "Text"],
+Cell[51812, 1232, 167, 4, 31, "Input",
+ InitializationGroup->True,
+ CellTags->"Model Info"],
+Cell[51982, 1238, 170, 3, 29, "Text"],
+Cell[52155, 1243, 176, 4, 31, "Input",
+ InitializationGroup->True,
+ CellTags->"ChiSquared Info"],
+Cell[52334, 1249, 170, 3, 29, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[52541, 1257, 383, 11, 123, "Section",
+ CellTags->"Example"],
+Cell[CellGroupData[{
+Cell[52949, 1272, 151, 2, 36, "Subsection"],
+Cell[53103, 1276, 538, 12, 72, "Input"],
+Cell[CellGroupData[{
+Cell[53666, 1292, 226, 5, 27, "Subsubsection"],
+Cell[53895, 1299, 207, 5, 31, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[54151, 1310, 192, 3, 36, "Subsection"],
+Cell[54346, 1315, 877, 14, 138, "Text"],
+Cell[55226, 1331, 754, 21, 67, "Text"],
+Cell[55983, 1354, 1857, 42, 152, "Input"],
+Cell[57843, 1398, 128, 1, 29, "Text"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[58008, 1404, 245, 3, 36, "Subsection"],
+Cell[58256, 1409, 205, 4, 31, "Input"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[58510, 1419, 374, 6, 70, "Section"],
+Cell[58887, 1427, 375, 7, 31, "Input",
+ InitializationCell->True]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)

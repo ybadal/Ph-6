@@ -1,0 +1,715 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 10.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       158,          7]
+NotebookDataLength[     25860,        705]
+NotebookOptionsPosition[     21923,        585]
+NotebookOutlinePosition[     23953,        636]
+CellTagsIndexPosition[     23868,        631]
+WindowTitle->ErrorBarScale - Wolfram Mathematica
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+Cell[" ", "SymbolColorBar",
+ CellMargins->{{Inherited, Inherited}, {-5, 0}}],
+
+Cell[TextData[{
+ ButtonBox["Mathematica",
+  BaseStyle->{"Link", "LinkTrail"},
+  ButtonData->"paclet:ErrorBarLogPlots/guide/ErrorBarLogPlots"],
+ StyleBox[" > ", "LinkTrailSeparator"]
+}], "LinkTrail"],
+
+Cell[BoxData[GridBox[{
+   {Cell["ERRORBARLOGPLOTS PACKAGE PACLET SYMBOL", "PacletNameCell"], Cell[
+    TextData[{
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"See Also \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"ErrorBarFunction\"\>":>
+       Documentation`HelpLookup["paclet:ErrorBarPlots/ref/ErrorBarFunction"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"More About \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"Error Bar Log Plotting Package\"\>":>
+       Documentation`HelpLookup[
+       "paclet:ErrorBarLogPlots/guide/ErrorBarLogPlotsPackage"]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}],
+     "\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\[ThickSpace]\
+\[ThickSpace]",
+     Cell[BoxData[
+      ActionMenuBox[
+       FrameBox["\<\"URL \[RightGuillemet]\"\>",
+        StripOnInput->False], {"\<\"ErrorBarLogPlots/ref/ErrorBarScale\"\>":>
+       None, "\<\"Copy Mathematica url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell["ErrorBarLogPlots/ref/ErrorBarScale"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; Null], 
+       Delimiter, "\<\"Copy web url\"\>":>
+       Module[{DocumentationSearch`Private`nb$}, 
+        DocumentationSearch`Private`nb$ = NotebookPut[
+           Notebook[{
+             Cell[
+              BoxData[
+               MakeBoxes[
+                Hyperlink[
+                "http://reference.wolfram.com/mathematica/ErrorBarLogPlots/\
+ref/ErrorBarScale.html"], StandardForm]], "Input", TextClipboardType -> 
+              "PlainText"]}, Visible -> False]]; 
+        SelectionMove[DocumentationSearch`Private`nb$, All, Notebook]; 
+        FrontEndTokenExecute[DocumentationSearch`Private`nb$, "Copy"]; 
+        NotebookClose[DocumentationSearch`Private`nb$]; 
+        Null], "\<\"Go to web url\"\>":>FrontEndExecute[{
+         NotebookLocate[{
+           URL[
+            StringJoin[
+            "http://reference.wolfram.com/mathematica/", 
+             "ErrorBarLogPlots/ref/ErrorBarScale", ".html"]], None}]}]},
+       Appearance->None,
+       MenuAppearance->Automatic]],
+      LineSpacing->{1.4, 0}]
+    }], "AnchorBar"]}
+  }]], "AnchorBarGrid",
+ CellID->1],
+
+Cell["ErrorBarScale", "ObjectName",
+ CellID->1224892054],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[GridBox[{
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"ErrorBarScale", "[", "]"}]], "InlineFormula"],
+     "\[LineSeparator]A function which may be supplied as a value of the ",
+     StyleBox[ButtonBox["ErrorBarFunction",
+      BaseStyle->"Link",
+      ButtonData->"paclet:ErrorBarPlots/ref/ErrorBarFunction"], "InlineCode"],
+     " option to ",
+     StyleBox[ButtonBox["ErrorListPlot",
+      BaseStyle->"Link",
+      ButtonData->"paclet:ErrorBarPlots/ref/ErrorListPlot"], "InlineCode"],
+     " or the ",
+     Cell[BoxData[
+      ButtonBox["ErrorListLogPlot",
+       BaseStyle->"Link",
+       ButtonData->"paclet:ErrorBarLogPlots/ref/ErrorListLogPlot"]], 
+      "InlineFormula"],
+     " family of plotting routines. It scales error bar sizes to make them \
+more visible in a plot."
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"ErrorBarScale", "[", 
+       StyleBox["scale", "TI"], "]"}]], "InlineFormula"],
+     "\[LineSeparator]Scale all error bar lengths by the factor ",
+     Cell[BoxData[
+      StyleBox["scale", "TI"]], "InlineFormula"],
+     " and then call the default error bar function to draw the scaled error \
+bars."
+    }]]},
+   {"", Cell[TextData[{
+     Cell[BoxData[
+      RowBox[{"ErrorBarScale", "[", 
+       RowBox[{
+        SubscriptBox[
+         StyleBox["scale", "TI"], 
+         StyleBox["x", "TI"]], ",", 
+        SubscriptBox[
+         StyleBox["scale", "TI"], 
+         StyleBox["y", "TI"]]}], "]"}]], "InlineFormula"],
+     "\[LineSeparator]Scale the error bar lengths in the ",
+     Cell[BoxData[
+      StyleBox["x", "TI"]], "InlineFormula"],
+     " and ",
+     Cell[BoxData[
+      StyleBox["y", "TI"]], "InlineFormula"],
+     " directions independently."
+    }]]}
+  }]], "Usage",
+ GridBoxOptions->{
+ GridBoxBackground->{
+  "Columns" -> {{None}}, "ColumnsIndexed" -> {}, 
+   "Rows" -> {None, None, {None}}, "RowsIndexed" -> {}}}],
+
+Cell[CellGroupData[{
+
+Cell[TextData[Cell[BoxData[
+ ButtonBox[
+  FrameBox[
+   StyleBox[
+    RowBox[{"MORE", " ", "INFORMATION"}], "NotesFrameText"],
+   StripOnInput->False],
+  Appearance->{Automatic, None},
+  BaseStyle->None,
+  ButtonFunction:>(FrontEndExecute[{
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], All, ButtonCell], 
+     FrontEndToken["OpenCloseGroup"], 
+     FrontEnd`SelectionMove[
+      FrontEnd`SelectedNotebook[], After, CellContents]}]& ),
+  Evaluator->None,
+  Method->"Preemptive"]]]], "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->5216106],
+
+Cell[TextData[{
+ "To use ",
+ Cell[BoxData["ErrorBarScale"], "InlineFormula"],
+ ", you first need to load the ",
+ ButtonBox["ErrorBarLogPlots package",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarLogPlots/guide/ErrorBarLogPlotsPackage"],
+ " using ",
+ Cell[BoxData[
+  RowBox[{
+   ButtonBox["Needs",
+    BaseStyle->"Link",
+    ButtonData->"paclet:ref/Needs"], "[", "\"\<ErrorBarLogPlots`\>\"", "]"}]],
+   "InlineFormula"],
+ " or ",
+ Cell[BoxData[
+  RowBox[{
+   ButtonBox["<<",
+    BaseStyle->"Link",
+    ButtonData->"paclet:ref/Needs"], "ErrorBarLogPlots`"}]], "InlineFormula"],
+ "."
+}], "Notes",
+ CellID->727088225],
+
+Cell[TextData[{
+ Cell[BoxData["ErrorBarScale"], "InlineFormula"],
+ " scales the lengths of the error bars as drawn, not the error values \
+supplied in the data set. This means that error bars plotted on log scales \
+are drawn longer by the specified scale factors."
+}], "Notes",
+ CellID->228279031],
+
+Cell[TextData[{
+ Cell[BoxData["ErrorBarScale"], "InlineFormula"],
+ " calls the default error bar function to actually draw the error bars. The \
+default error bar function is that function used with the plot option ",
+ StyleBox[ButtonBox["ErrorBarFunction",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ErrorBarPlots/ref/ErrorBarFunction"], "InlineCode"],
+ StyleBox[" -> ", "InlineCode"],
+ StyleBox[ButtonBox["Automatic",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Automatic"], "InlineCode"],
+ "."
+}], "Notes",
+ CellID->13420036],
+
+Cell[TextData[{
+ "With ",
+ StyleBox[ButtonBox["PlotRange",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/PlotRange"], "InlineCode"],
+ StyleBox[" -> ", "InlineCode"],
+ StyleBox[ButtonBox["Automatic",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/Automatic"], "InlineCode"],
+ " (the default), the plot range is determined before the scale factors are \
+applied to the error bar lengths, so scaled error bars near the edges of a \
+plot may be truncated in the plot (see the example)."
+}], "Notes",
+ CellID->165792953]
+}, Closed]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["EXAMPLES",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection",
+ CellID->174920824],
+
+Cell[CellGroupData[{
+
+Cell[TextData[{
+ "Basic Examples",
+ "\[NonBreakingSpace]\[NonBreakingSpace]",
+ Cell["(1)", "ExampleCount"]
+}], "ExampleSection",
+ CellID->139789707],
+
+Cell["\<\
+You must load the package before it can be used. The package in turn loads \
+ErrorBarPlots`\
+\>", "ExampleText",
+ CellID->116741225],
+
+Cell[BoxData[
+ RowBox[{"<<", "ErrorBarLogPlots`"}]], "Input",
+ CellLabel->"In[1]:=",
+ CellID->25330127],
+
+Cell["Small errors can be hard to see on a plot:", "ExampleText",
+ CellID->399788990],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"exampledata", "=", 
+   RowBox[{"Table", "[", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"i", "\[PlusMinus]", ".01"}], ",", 
+       RowBox[{
+        RowBox[{"(", 
+         RowBox[{"i", "^", "2"}], ")"}], "\[PlusMinus]", ".015"}]}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"i", ",", "1.0", ",", "4.0", ",", ".5"}], "}"}]}], "]"}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"ErrorListPlot", "[", 
+  RowBox[{"exampledata", ",", 
+   RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+   RowBox[{"Axes", "\[Rule]", "False"}]}], "]"}]}], "Input",
+ CellLabel->"In[2]:=",
+ CellID->153870976],
+
+Cell[BoxData[
+ GraphicsBox[
+  TagBox[RasterBox[CompressedData["
+1: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
+f3OVlfM=
+    "], {{0, 154}, {240, 0}}, {0, 255},
+    ColorFunction->RGBColor],
+   BoxForm`ImageTag["Byte", ColorSpace -> "RGB", Interleaving -> True],
+   Selectable->False],
+  BaseStyle->"ImageGraphics",
+  ImageSize->Automatic,
+  ImageSizeRaw->{240, 154},
+  PlotRange->{{0, 240}, {0, 154}}]], "Output",
+ ImageSize->{244, 154},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[2]=",
+ CellID->243997822]
+}, Open  ]],
+
+Cell[TextData[{
+ "Using ",
+ Cell[BoxData["ErrorBarScale"], "InlineFormula"],
+ " makes the error bars large enough to view easily:"
+}], "ExampleText",
+ CellID->629788606],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ErrorListPlot", "[", 
+  RowBox[{"exampledata", ",", 
+   RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+   RowBox[{"Axes", "\[Rule]", "False"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"ErrorBarFunction", "\[Rule]", 
+    RowBox[{"ErrorBarScale", "[", 
+     RowBox[{"10", ",", "100"}], "]"}]}]}], "]"}]], "Input",
+ CellLabel->"In[3]:=",
+ CellID->335928429],
+
+Cell[BoxData[
+ GraphicsBox[
+  TagBox[RasterBox[CompressedData["
+1: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
+X0UlkAI=
+    "], {{0, 156}, {240, 0}}, {0, 255},
+    ColorFunction->RGBColor],
+   BoxForm`ImageTag["Byte", ColorSpace -> "RGB", Interleaving -> True],
+   Selectable->False],
+  BaseStyle->"ImageGraphics",
+  ImageSize->Automatic,
+  ImageSizeRaw->{240, 156},
+  PlotRange->{{0, 240}, {0, 156}}]], "Output",
+ ImageSize->{244, 156},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[3]=",
+ CellID->122524649]
+}, Open  ]],
+
+Cell[TextData[{
+ "The option ",
+ StyleBox[ButtonBox["PlotRangePadding",
+  BaseStyle->"Link",
+  ButtonData->"paclet:ref/PlotRangePadding"], "InlineCode",
+  FontSize->12],
+ " may be used to make the larger error bars completely visible:"
+}], "ExampleText",
+ CellID->453333668],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"ErrorListPlot", "[", 
+  RowBox[{"exampledata", ",", 
+   RowBox[{"Frame", "\[Rule]", "True"}], ",", 
+   RowBox[{"Axes", "\[Rule]", "False"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"ErrorBarFunction", "\[Rule]", 
+    RowBox[{"ErrorBarScale", "[", 
+     RowBox[{"10", ",", "100"}], "]"}]}], ",", "\[IndentingNewLine]", 
+   RowBox[{"PlotRangePadding", "\[Rule]", 
+    RowBox[{"Scaled", "[", ".1", "]"}]}]}], "]"}]], "Input",
+ CellLabel->"In[4]:=",
+ CellID->13622803],
+
+Cell[BoxData[
+ GraphicsBox[
+  TagBox[RasterBox[CompressedData["
+1:eJzt3X9vFEUcx3Gi/uHT8KHoQ8D/KSASaiKaggJBkLbSpgSEKii/TRNQSJSk
+SrFXWkppQy9QLaVJG+FyUBuEgKEljUow5px2ZVl3r3d7tzM7P/b9ytHsbXf3
+ZpNPl7nvzc69tva9letfWrFixaZXxY+Va7a83tS0Ztubr4gnb2zb/Pbal8XC
+cfFvXvxbXC7VYj1gsJrC7OW56hobNzCkGc60U8uJkGfTmuFMO+3Nc3IqjqkC
+7ZRLejsNyTMgRX15JtIwkKz3g4AhyDNcQp7hEvIMl5BnuIT6BpxBfQOOIc9w
+CXlG+uYXnrZ35Td/Nvju3n6xMHH7oawjk2ekz8vzxn3963b3kme44Vj3RFPn
+JbnHpL4BXaTnmfoGNDLn+iy3Dcgm8gyXkGfY64+/nk3f+X1+4am/JpTnZ3//
+IzZ4NPdnklchz0iHyOqq5p4r47P+mkPf/vzOnot+gMWC2ODc5VtJXoU8Ix1D
+P/0q4rrl4FB7V148Wk9eFU+9x/bDw2JNy4nFNQfOjCV5Fep1SEdutLiY3l09
+foxfPFpeLLd15et+Cep1SE2ov1GYnfMzPHB9pqSmvxF8GphyJukUB4CIq8jq
+zP0n/ppPTl5d19YrwizeCZaW3jCKDUTsk7xKNMBlf7XcLkDdlNbrvIXg07IX
+5xJ5hiQp1J9D8a68DZBEmnmuvA0lDiQnN8+V3+txfYZqKV+f6T9DEa+U8dGR
+4Q0dfaGiR0LUn5E+r9TsP4IfgidEnpE+b+jRyI3ZgWt3Q4OUEiLPcAnjN+AM
+xm+gKn9ugcaOPrEgsa+rAnlGZf7cAg3NPeQZbjjWPbGquUd3K6ojz4iDPMMl
+bueZEkfWWJFn6huIyYo8l+hvoJyycwuE8iw2+O3RQupNq4I8I6rs3AKrdvUE
+J8cQG4iQ62hdJeQZUVXnFhAPsbzz6IjuloaRZ0TFnFvgg4OXdbc0jPEbiKo6
+t0DJyP4G9Q2UVXZugYalMHtzCwhig7HpB5oauCzyjDio18El5BkuIc9widt5
+JtJZY0WeqW+gKn9uAW/yz4TzJarG/BuoLDS3QML5bFWLBrjs+uV2gWmkZ8+f
+WyA3Wkz+/SaqhQJMnm3X3pXf1Dloxb1+KjB/nXvEZdn8926K1JdnShwmy2ae
+y8aS67MDsplnD/UN95Bn1bsgTeRZ9S5QJ/o1wd/0TYXujTLzXj8VyLPtQl/b
+N7/w1K8/T9x+6K00cOy9IozfsF3x3ryIa1PnoHdbn1jw87zx036T7/WTjvEb
+Drg187jMXX7eY5fR9/qpQJ5tF/2a4P1nxkL3RtHfkLsL1Il+TXC0vmHmvX4q
+kGf3UK9TvQvSRJ5V74I0kedadyHSJstsnqnX6RWsrUmsP2Q2zyX6G1qJ4LUt
+fdhxqndKVv3BP6b59/qpQJ718q6lEm9isuhePxXIs17S8yyuyfnJe1bc66cC
+edZLep4zjvqGXuRZIuob2pFnuchzmpYbe39r5rG/pjA7F5x4GTUhz2mKM/a+
+qfNSe1deXxvtRp7TFGfs/Vu7f3x//yXdLbUVeU5TKM87j474ef7w88vkObm6
+6xukug7Ljb3vvlLwx97T36gb9Y2URd8PRusbvB9MokI41wfE3MVhImZjU/dz
+o8XJwiOJ9/5Tr5Orcp5r3cVhohugbiwceZalQmiZ7yuod7R44MyY3LFwJfIs
+W5yLMP0Nz5XxWenZI89yxQlnNM/ZLHGQZ5NVziTX5yjpeVYxnj/j4tQ34u/i
+Nul5VnS/VZZRf45PRX8DcpHnCkLTCuXyd0Jj4XpHixn8zh2TkecKgt0AxsJZ
+gftTKlhMb0u5eTsDKxs7+nQ3E/9xdfyG6AZ8dX6yrSt/qncqSX9AxHXHkWHR
+6xCPE9/f9DO87+vr3soNHbmth4YkthwJOZnn4GfTSfoDobLD8e6bjIUznJN5
+LszOnb04LdKYGy1KHKtGfcN8Tua59Dx7cicIIs/mI8+1HpM8m8zV+gZ5ziBX
+6xsl8pxV5LnWY5Jnk2nP8+nc1MfHRho7+sRPsVz3cdq78j8MF/yn3mfT+cl7
+wRf64rvxuo8v9t16aKihuaflxNXgC8EoJuR5x5HhhqVPLpLkWVw5956+Ji7I
+4jE2dd+vP58fKXgrxfE37uuv+/giz9sPD4u/u9aT5Nlc2vNcWpriNXnfoOpn
+0+JPZnXrBVlthplMqG/IyrN/fR64dtfP8+neKSnXZ5jPkPqGlDyH+s/eZ9Mi
+zP5n0wn7z7CCM3kOUVHfgPnIM1xCnuESLXkODbNcLK/9v1a8NJdsojk2yXM2
+aclz456+TZ2D3pD4xQnqn9civjw37q0UvxXbJHkJ8pxNWup1q1svNEQLxVJr
+xeQ5g3TV64L9jcLsnJ/ngesz3sqE/Q1Z96fAOlrmkwnd5n/24nSoVix+K7ZJ
+cnwp9w/COibM96WivoFsIs9wCXmGS+rLs9whSeQZyZkzXy55hiza58uduf8k
+N1qUPlcGskn7+I32pQm9qRVDCu15FtfkG788EBdn8ZPrMxLSnmdAorrHb5Bq
+mMaQ+60AWcgzXEKe4RLyDJeQZ7iE+gacQX0DjjEkz7b8jdBOuaS3U0qeqx7E
+hA3iMKGdzpxIHNKbkZ08xzlTE5rhTDu1nEiS94OAgWrNMwAAAACNzO/D2/Je
+w5Z2eixqanzmn1SweSY31ZZ2erwWmt/Omlh3UrY01fB2+s0zvJ31seWkrGgn
+/99pZ8VJWdFIn8mtdf4TEPPPyPwWluy87tnSzpoYflIWXUysaGSQRU0FAAAA
+AJjvX00wU68=
+    "], {{0, 156}, {240, 0}}, {0, 255},
+    ColorFunction->RGBColor],
+   BoxForm`ImageTag["Byte", ColorSpace -> "RGB", Interleaving -> True],
+   Selectable->False],
+  BaseStyle->"ImageGraphics",
+  ImageSize->Automatic,
+  ImageSizeRaw->{240, 156},
+  PlotRange->{{0, 240}, {0, 156}}]], "Output",
+ ImageSize->{244, 156},
+ ImageMargins->{{0, 0}, {0, 0}},
+ ImageRegion->{{0, 1}, {0, 1}},
+ CellLabel->"Out[4]=",
+ CellID->500175981]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["SEE ALSO",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "SeeAlsoSection",
+ CellID->1255426704],
+
+Cell[TextData[Cell[BoxData[
+ StyleBox[
+  ButtonBox["ErrorBarFunction",
+   BaseStyle->"Link",
+   ButtonData->"paclet:ErrorBarPlots/ref/ErrorBarFunction"],
+  FontFamily->"Verdana"]], "InlineFormula"]], "SeeAlso",
+ CellID->929782353]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[TextData[ButtonBox["MORE ABOUT",
+ BaseStyle->None,
+ Appearance->{Automatic, None},
+ Evaluator->None,
+ Method->"Preemptive",
+ ButtonFunction:>(FrontEndExecute[{
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], All, ButtonCell], 
+    FrontEndToken["OpenCloseGroup"], 
+    FrontEnd`SelectionMove[
+     FrontEnd`SelectedNotebook[], After, 
+     CellContents]}]& )]], "MoreAboutSection",
+ CellID->38303248],
+
+Cell[TextData[ButtonBox["Error Bar Log Plotting Package",
+ BaseStyle->"Link",
+ ButtonData->
+  "paclet:ErrorBarLogPlots/guide/ErrorBarLogPlotsPackage"]], "MoreAbout",
+ CellID->72954072]
+}, Open  ]],
+
+Cell[" ", "FooterCell"]
+},
+Saveable->False,
+ScreenStyleEnvironment->"Working",
+WindowSize->{725, 750},
+WindowMargins->{{0, Automatic}, {Automatic, 0}},
+WindowTitle->"ErrorBarScale - Wolfram Mathematica",
+TaggingRules->{
+ "ModificationHighlight" -> False, 
+  "Metadata" -> {
+   "built" -> "{2015, 12, 25, 8, 16, 35.9391314}", "context" -> 
+    "ErrorBarLogPlots`", "keywords" -> {}, "index" -> True, "label" -> 
+    "ErrorBarLogPlots Package Paclet Symbol", "language" -> "en", "paclet" -> 
+    "ErrorBarLogPlots Package", "status" -> "None", "summary" -> 
+    "ErrorBarScale[] A function which may be supplied as a value of the \
+ErrorBarFunction option to ErrorListPlot or the ErrorListLogPlot family of \
+plotting routines. It scales error bar sizes to make them more visible in a \
+plot.ErrorBarScale[scale] Scale all error bar lengths by the factor scale and \
+then call the default error bar function to draw the scaled error \
+bars.ErrorBarScale[scale_x, scale_y] Scale the error bar lengths in the x and \
+y directions independently.", "synonyms" -> {}, "title" -> "ErrorBarScale", 
+    "type" -> "Symbol", "uri" -> "ErrorBarLogPlots/ref/ErrorBarScale"}, 
+  "LinkTrails" -> "", "SearchTextTranslated" -> ""},
+CellContext->"Global`",
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (December 4, 2014)",
+StyleDefinitions->Notebook[{
+   Cell[
+    StyleData[
+    StyleDefinitions -> FrontEnd`FileName[{"Wolfram"}, "Reference.nb"]]], 
+   Cell[
+    StyleData["Input"], CellContext -> "Global`"], 
+   Cell[
+    StyleData["Output"], CellContext -> "Global`"]}, Visible -> False, 
+  FrontEndVersion -> "10.0 for Microsoft Windows (64-bit) (December 4, 2014)",
+   StyleDefinitions -> "Default.nb"]
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{
+ "PrimaryExamplesSection"->{
+  Cell[8176, 241, 461, 13, 70, "PrimaryExamplesSection",
+   CellTags->"PrimaryExamplesSection",
+   CellID->174920824]}
+ }
+*)
+(*CellTagsIndex
+CellTagsIndex->{
+ {"PrimaryExamplesSection", 23725, 624}
+ }
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[607, 21, 76, 1, 70, "SymbolColorBar"],
+Cell[686, 24, 198, 5, 70, "LinkTrail"],
+Cell[887, 31, 2671, 61, 70, "AnchorBarGrid",
+ CellID->1],
+Cell[3561, 94, 56, 1, 70, "ObjectName",
+ CellID->1224892054],
+Cell[CellGroupData[{
+Cell[3642, 99, 1905, 53, 70, "Usage"],
+Cell[CellGroupData[{
+Cell[5572, 156, 578, 17, 70, "NotesSection",
+ CellGroupingRules->{"SectionGrouping", 50},
+ CellID->5216106],
+Cell[6153, 175, 620, 22, 70, "Notes",
+ CellID->727088225],
+Cell[6776, 199, 298, 6, 70, "Notes",
+ CellID->228279031],
+Cell[7077, 207, 531, 13, 70, "Notes",
+ CellID->13420036],
+Cell[7611, 222, 516, 13, 70, "Notes",
+ CellID->165792953]
+}, Closed]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[8176, 241, 461, 13, 70, "PrimaryExamplesSection",
+ CellTags->"PrimaryExamplesSection",
+ CellID->174920824],
+Cell[CellGroupData[{
+Cell[8662, 258, 148, 5, 70, "ExampleSection",
+ CellID->139789707],
+Cell[8813, 265, 142, 4, 70, "ExampleText",
+ CellID->116741225],
+Cell[8958, 271, 103, 3, 70, "Input",
+ CellID->25330127],
+Cell[9064, 276, 85, 1, 70, "ExampleText",
+ CellID->399788990],
+Cell[CellGroupData[{
+Cell[9174, 281, 646, 20, 47, "Input",
+ CellID->153870976],
+Cell[9823, 303, 2574, 50, 175, "Output",
+ CellID->243997822]
+}, Open  ]],
+Cell[12412, 356, 169, 5, 70, "ExampleText",
+ CellID->629788606],
+Cell[CellGroupData[{
+Cell[12606, 365, 375, 9, 47, "Input",
+ CellID->335928429],
+Cell[12984, 376, 3428, 64, 177, "Output",
+ CellID->122524649]
+}, Open  ]],
+Cell[16427, 443, 274, 8, 70, "ExampleText",
+ CellID->453333668],
+Cell[CellGroupData[{
+Cell[16726, 455, 488, 11, 65, "Input",
+ CellID->13622803],
+Cell[17217, 468, 3310, 62, 177, "Output",
+ CellID->500175981]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[20588, 537, 417, 12, 70, "SeeAlsoSection",
+ CellID->1255426704],
+Cell[21008, 551, 230, 6, 70, "SeeAlso",
+ CellID->929782353]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[21275, 562, 419, 12, 70, "MoreAboutSection",
+ CellID->38303248],
+Cell[21697, 576, 184, 4, 70, "MoreAbout",
+ CellID->72954072]
+}, Open  ]],
+Cell[21896, 583, 23, 0, 70, "FooterCell"]
+}
+]
+*)
+
+(* End of internal cache information *)
+
