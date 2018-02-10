@@ -1,0 +1,1218 @@
+(* Content-type: application/vnd.wolfram.mathematica *)
+
+(*** Wolfram Notebook File ***)
+(* http://www.wolfram.com/nb *)
+
+(* CreatedBy='Mathematica 8.0' *)
+
+(*CacheID: 234*)
+(* Internal cache information:
+NotebookFileLineBreakTest
+NotebookFileLineBreakTest
+NotebookDataPosition[       157,          7]
+NotebookDataLength[     45818,       1209]
+NotebookOptionsPosition[     43415,       1123]
+NotebookOutlinePosition[     43839,       1139]
+CellTagsIndexPosition[     43796,       1136]
+WindowFrame->Normal*)
+
+(* Beginning of Notebook Content *)
+Notebook[{
+
+Cell[CellGroupData[{
+Cell["Element isotopes and ionization energies for Experiment 9", "Subtitle",
+ CellChangeTimes->{{3.566826520036722*^9, 3.5668265487407722`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"If", "[", 
+  RowBox[{
+   RowBox[{"$VersionNumber", " ", "<", "9.0"}], ",", "\[IndentingNewLine]", 
+   RowBox[{"DialogInput", "[", "\[IndentingNewLine]", 
+    RowBox[{"Column", "[", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{
+        RowBox[{"Beep", "[", "]"}], ";", "\[IndentingNewLine]", 
+        RowBox[{"TextCell", "[", 
+         RowBox[{
+          RowBox[{
+          "\"\<This notebook requires Mathematica v9.0 or later. \>\"", "<>", 
+           "\[IndentingNewLine]", 
+           "\"\<Try using \\\"ionization energies.legacy.nb\\\" \
+instead.\>\""}], ",", "\[IndentingNewLine]", "\"\<Subsubsection\>\""}], 
+         "]"}]}], ",", "\[IndentingNewLine]", 
+       RowBox[{"DefaultButton", "[", 
+        RowBox[{"\"\<    OK    \>\"", ",", 
+         RowBox[{"DialogReturn", "[", "True", "]"}]}], "]"}]}], 
+      "\[IndentingNewLine]", "}"}], "]"}], "]"}]}], "\[IndentingNewLine]", 
+  "]"}]], "Input",
+ InitializationCell->True,
+ CellChangeTimes->{{3.5664914690777006`*^9, 3.5664914848649282`*^9}, {
+  3.5664917378973722`*^9, 3.5664917570854063`*^9}, {3.6615207255167613`*^9, 
+  3.6615207696668234`*^9}, {3.661520816696889*^9, 3.661520921587036*^9}, {
+  3.661520964627096*^9, 3.6615209799271173`*^9}, {3.6615268255849066`*^9, 
+  3.661526826654908*^9}}],
+
+Cell[CellGroupData[{
+
+Cell["\<\
+A couple of good constants to have available for your data analysis\
+\>", "Subsection",
+ CellChangeTimes->{{3.56682723042437*^9, 3.566827258317219*^9}, {
+  3.6615285844373693`*^9, 3.6615285924373803`*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"Quantity", "[", "\"\<electron charge\>\"", "]"}], "/", 
+    RowBox[{"Quantity", "[", "\"\<atomic mass unit\>\"", "]"}]}], ")"}], "~", 
+  "UnitConvert", "~", "\"\<Metric\>\""}]], "Input",
+ CellChangeTimes->{{3.661526880734984*^9, 3.661526937505063*^9}, {
+   3.6615269956151447`*^9, 3.661527052615225*^9}, {3.6615271604953756`*^9, 
+   3.6615271686053867`*^9}, {3.6615272020554338`*^9, 3.6615272074954414`*^9}, 
+   3.661527241665489*^9, {3.661527695036124*^9, 3.6615277395061865`*^9}, {
+   3.661527868226366*^9, 3.6615278717263713`*^9}, {3.6615279104164257`*^9, 
+   3.6615280253265867`*^9}, {3.661528078856661*^9, 3.6615280891466756`*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"9.64853364614390870843588718`6.880698478410631*^7"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", 
+          
+          RowBox[{"\"C\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+            "\"kg\""}]}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: coulombs per kilogram"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", 
+       FractionBox["\"Coulombs\"", "\"Kilograms\""]}], "]"}]& )]], "Output",
+ CellChangeTimes->{{3.6615277318561754`*^9, 3.661527744426193*^9}, {
+  3.661527873716374*^9, 3.6615279763465176`*^9}, {3.661528010256565*^9, 
+  3.661528026566588*^9}, {3.661528081746665*^9, 3.6615280899466767`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{
+   RowBox[{"Quantity", "[", "\"\<Torr\>\"", "]"}], "~", "UnitConvert", "~", 
+   "\"\<Metric\>\""}], "//", "N"}]], "Input",
+ CellChangeTimes->{{3.566827281108859*^9, 3.5668272835424633`*^9}, {
+   3.661527262555518*^9, 3.6615272976355677`*^9}, 3.661527539425906*^9, 
+   3.6615279031064153`*^9, {3.6615280420266094`*^9, 3.6615280567866306`*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"133.32236842105263`"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", "\"Pa\""}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: pascals"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", "\"Pascals\""}], "]"}]& )]], "Output",
+ CellChangeTimes->{
+  3.566827284338065*^9, {3.661527279895543*^9, 3.6615272986655693`*^9}, 
+   3.6615280580666323`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"(", 
+   RowBox[{
+    RowBox[{"Quantity", "[", "\"\<BoltzmannConstant\>\"", "]"}], 
+    RowBox[{"Quantity", "[", " ", 
+     RowBox[{"298.", " ", ",", "\"\<Kelvin\>\""}], "]"}]}], ")"}], "~", 
+  "UnitConvert", "~", "\"\<Metric\>\""}]], "Input",
+ CellChangeTimes->{{3.5668273033388977`*^9, 3.5668273366917567`*^9}, {
+  3.661527326645608*^9, 3.661527422375742*^9}, {3.661527503945856*^9, 
+  3.661527527055889*^9}, {3.6615280949366837`*^9, 3.6615281123867083`*^9}}],
+
+Cell[BoxData[
+ TemplateBox[{"4.114333424`*^-21"},
+  "QuantityUnit",
+  DisplayFunction->(TooltipBox[
+    StyleBox[
+     RowBox[{#, "\[InvisibleSpace]", 
+       StyleBox[
+        RowBox[{" ", "\"J\""}], "QuantityUnitTraditionalLabel"]}], 
+     ShowStringCharacters -> False], "Unit: joules"]& ),
+  InterpretationFunction->(RowBox[{"Quantity", "[", 
+     RowBox[{#, ",", "\"Joules\""}], "]"}]& )]], "Output",
+ CellChangeTimes->{
+  3.566827337393758*^9, {3.661527366895664*^9, 3.6615274233957434`*^9}, {
+   3.6615275076458616`*^9, 3.661527516645874*^9}, 3.6615281139367104`*^9}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Alkali Metals", "Section",
+ CellChangeTimes->{{3.566826576867622*^9, 3.56682658161003*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"alkalis", "=", 
+   RowBox[{
+    RowBox[{"ElementData", "[", 
+     RowBox[{"\"\<AlkaliMetal\>\"", ",", "\"\<Name\>\""}], "]"}], "//", 
+    "Most"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"alkalis", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"StringJoin", "[", 
+     RowBox[{"Join", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"ToUpperCase", "[", 
+         RowBox[{"First", "[", "#", "]"}], "]"}], "}"}], ",", 
+       RowBox[{"Rest", "[", "#", "]"}]}], "]"}], "]"}], "&"}], "/@", 
+   RowBox[{"Characters", "[", "alkalis", "]"}]}]}]}], "Input",
+ CellChangeTimes->{{3.5664917098017235`*^9, 3.5664917104725246`*^9}, {
+  3.5668249230387173`*^9, 3.566824925581522*^9}, {3.566825000414853*^9, 
+  3.566825005344462*^9}, {3.5668255688798513`*^9, 3.5668255768046656`*^9}, {
+  3.566825685427656*^9, 3.5668256985940795`*^9}, {3.566825805844268*^9, 
+  3.566825809884675*^9}, {3.6616057877374845`*^9, 3.661605792297491*^9}, {
+  3.661605829267543*^9, 3.661605833767549*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"Lithium\"\>", ",", "\<\"Sodium\"\>", ",", "\<\"Potassium\"\>", 
+   ",", "\<\"Rubidium\"\>", ",", "\<\"Cesium\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.5664917115489264`*^9, 3.5664917640742188`*^9, 3.5664918122940197`*^9, {
+   3.5664918441818438`*^9, 3.5664918656100693`*^9}, 3.5668249174071074`*^9, 
+   3.566825034220113*^9, 3.5668255788482695`*^9, 3.566825701090084*^9, 
+   3.5668258493995447`*^9, 3.566825891972019*^9, 3.5668266598129673`*^9, 
+   3.6615275666059437`*^9, 3.6616060084277935`*^9, 3.66160609882792*^9, 
+   3.6616062648581524`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"energies", "=", 
+  RowBox[{"First", "/@", 
+   RowBox[{"(", 
+    RowBox[{
+     RowBox[{
+      RowBox[{"ElementData", "[", 
+       RowBox[{"#", ",", "\"\<IonizationEnergies\>\""}], "]"}], "&"}], "/@", 
+     "alkalis"}], ")"}]}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"energies", "/=", 
+   RowBox[{
+    RowBox[{"Quantity", "[", "\"\<Avogadro's Number\>\"", "]"}], "/", 
+    RowBox[{"Quantity", "[", "\"\<Moles\>\"", "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"energies", " ", "=", " ", 
+  RowBox[{
+  "energies", "~", "UnitConvert", "~", "\"\<Electron Volt\>\""}]}]}], "Input",
+ CellChangeTimes->{{3.566491585609905*^9, 3.566491677213266*^9}, {
+   3.566491856067524*^9, 3.566491859607726*^9}, {3.566825829135109*^9, 
+   3.5668258311007123`*^9}, 3.66152757768596*^9, {3.6615276301960335`*^9, 
+   3.6615276369460425`*^9}, 3.661528180306803*^9, {3.6615282991869698`*^9, 
+   3.661528408887123*^9}, {3.661606141027979*^9, 3.6616061612380075`*^9}, {
+   3.6616062350381107`*^9, 3.6616062476481285`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{"520.2`4."},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", 
+            
+            RowBox[{"\"kJ\"", "\[InvisibleSpace]", "\"/\"", 
+              "\[InvisibleSpace]", "\"mol\""}]}], 
+          "QuantityUnitTraditionalLabel"]}], ShowStringCharacters -> False], 
+      "Unit: kilojoules per mole"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", 
+         FractionBox["\"Kilojoules\"", "\"Moles\""]}], "]"}]& )], ",", 
+   TemplateBox[{"495.8`4."},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", 
+            
+            RowBox[{"\"kJ\"", "\[InvisibleSpace]", "\"/\"", 
+              "\[InvisibleSpace]", "\"mol\""}]}], 
+          "QuantityUnitTraditionalLabel"]}], ShowStringCharacters -> False], 
+      "Unit: kilojoules per mole"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", 
+         FractionBox["\"Kilojoules\"", "\"Moles\""]}], "]"}]& )], ",", 
+   TemplateBox[{"418.8`4."},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", 
+            
+            RowBox[{"\"kJ\"", "\[InvisibleSpace]", "\"/\"", 
+              "\[InvisibleSpace]", "\"mol\""}]}], 
+          "QuantityUnitTraditionalLabel"]}], ShowStringCharacters -> False], 
+      "Unit: kilojoules per mole"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", 
+         FractionBox["\"Kilojoules\"", "\"Moles\""]}], "]"}]& )], ",", 
+   TemplateBox[{"403.`4."},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", 
+            RowBox[{
+             "\"kJ\"", "\[InvisibleSpace]", "\"/\"", "\[InvisibleSpace]", 
+              "\"mol\""}]}], "QuantityUnitTraditionalLabel"]}], 
+       ShowStringCharacters -> False], "Unit: kilojoules per mole"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", 
+         FractionBox["\"Kilojoules\"", "\"Moles\""]}], "]"}]& )], ",", 
+   TemplateBox[{"375.7`4."},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", 
+            
+            RowBox[{"\"kJ\"", "\[InvisibleSpace]", "\"/\"", 
+              "\[InvisibleSpace]", "\"mol\""}]}], 
+          "QuantityUnitTraditionalLabel"]}], ShowStringCharacters -> False], 
+      "Unit: kilojoules per mole"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", 
+         FractionBox["\"Kilojoules\"", "\"Moles\""]}], "]"}]& )]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.566491608557545*^9, {3.5664916391647987`*^9, 3.56649167936607*^9}, 
+   3.5664917640898185`*^9, 3.5664918123060207`*^9, {3.5664918441928444`*^9, 
+   3.5664918656220703`*^9}, 3.566824917438308*^9, 3.566825034220113*^9, 
+   3.5668258494151444`*^9, 3.5668258919876194`*^9, 3.5668262830491056`*^9, 
+   3.5668266598285675`*^9, 3.661527578775961*^9, 3.6615276381760445`*^9, 
+   3.661528182196806*^9, 3.661528269656928*^9, {3.661528320837*^9, 
+   3.6615283519470434`*^9}, {3.6615284011971126`*^9, 3.6615284099771247`*^9}, 
+   3.6616060989279203`*^9, 3.6616061638180113`*^9, {3.661606240788119*^9, 
+   3.661606264958153*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{"5.39149283288228094178062020550930328607`3.9994212121735693"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+       ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )], ",", 
+   TemplateBox[{"5.13860466463482293528418204131394188704`3.9994212121735693"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+       ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )], ",", 
+   TemplateBox[{"4.34055593696866447216017635922202271545`3.9994212121735693"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+       ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )], ",", 
+   TemplateBox[{"4.17680048375924494336330246601355098894`3.9994212121735693"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+       ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )], ",", 
+   TemplateBox[{"3.89385593485942512461933681509005237316`3.9994212121735693"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+       ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.566491608557545*^9, {3.5664916391647987`*^9, 3.56649167936607*^9}, 
+   3.5664917640898185`*^9, 3.5664918123060207`*^9, {3.5664918441928444`*^9, 
+   3.5664918656220703`*^9}, 3.566824917438308*^9, 3.566825034220113*^9, 
+   3.5668258494151444`*^9, 3.5668258919876194`*^9, 3.5668262830491056`*^9, 
+   3.5668266598285675`*^9, 3.661527578775961*^9, 3.6615276381760445`*^9, 
+   3.661528182196806*^9, 3.661528269656928*^9, {3.661528320837*^9, 
+   3.6615283519470434`*^9}, {3.6615284011971126`*^9, 3.6615284099771247`*^9}, 
+   3.6616060989279203`*^9, 3.6616061638180113`*^9, {3.661606240788119*^9, 
+   3.661606265108153*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"isotopes", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"#", ",", 
+      RowBox[{"ElementData", "[", 
+       RowBox[{"#", ",", "\"\<IsotopeAbundances\>\""}], "]"}]}], "}"}], "&"}],
+    "/@", "alkalis"}]}]], "Input",
+ CellChangeTimes->{{3.5668250467625346`*^9, 3.566825081113795*^9}, {
+  3.5668256287995567`*^9, 3.56682564764439*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"Lithium\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"6", ",", "0.0759`3."}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"7", ",", "0.9241`4."}], "}"}]}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Sodium\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"23", ",", "1.`3."}], "}"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Potassium\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"39", ",", "0.932581`6."}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"40", ",", "0.000117`3."}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"41", ",", "0.067302`5."}], "}"}]}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Rubidium\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"85", ",", "0.7217`4."}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"87", ",", "0.2783`4."}], "}"}]}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Cesium\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"133", ",", "1.`3."}], "}"}], "}"}]}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.5668250819561963`*^9, 3.5668255825766754`*^9, {3.566825636942771*^9, 
+   3.5668256491887927`*^9}, 3.5668258494463444`*^9, 3.566825892003219*^9, 
+   3.5668266598441677`*^9, 3.6615284395271664`*^9, {3.6616060791078925`*^9, 
+   3.6616060991579204`*^9}, 3.661606265128153*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Print", "[", 
+  RowBox[{"Style", "[", 
+   RowBox[{
+   "\"\<Alkali Metal Isotopes and Abundances\>\"", ",", "Bold", ",", 
+    "Italic"}], "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"isotopes", "//", "TableForm"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"Style", "[", 
+   RowBox[{
+   "\"\<Alkali Metal Ionization Energies (eV)\>\"", ",", "Bold", ",", 
+    "Italic"}], "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"alkalis", ",", "energies"}], "}"}], "//", "Transpose"}], "//", 
+   "TableForm"}], "]"}], "\[IndentingNewLine]"}], "Input",
+ CellChangeTimes->{{3.5668250981178246`*^9, 3.566825103858635*^9}, {
+   3.566825654586402*^9, 3.566825663681218*^9}, {3.566825722009721*^9, 
+   3.5668257806502237`*^9}, {3.566826344560014*^9, 3.566826370050459*^9}, {
+   3.5668265973036575`*^9, 3.56682660427687*^9}, {3.661528479307222*^9, 
+   3.661528538107304*^9}, 3.6616062889781866`*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ StyleBox["\<\"Alkali Metal Isotopes and Abundances\"\>",
+  StripOnInput->False,
+  FontWeight->Bold,
+  FontSlant->Italic]], "Print",
+ CellChangeTimes->{{3.566825753584176*^9, 3.5668257648317957`*^9}, 
+   3.5668258494463444`*^9, 3.566825892018819*^9, {3.5668263649024496`*^9, 
+   3.5668263709864607`*^9}, 3.5668266598441677`*^9, 3.66152844937718*^9, {
+   3.6615284834472275`*^9, 3.661528540777308*^9}, 3.6616060991779203`*^9, {
+   3.661606265138153*^9, 3.6616062900981874`*^9}}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"\<\"Lithium\"\>", GridBox[{
+       {"6", "0.0759`3."},
+       {"7", "0.9241`4."}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.1]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}]},
+    {"\<\"Sodium\"\>", GridBox[{
+       {"23", "1.`3."}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.1]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}]},
+    {"\<\"Potassium\"\>", GridBox[{
+       {"39", "0.932581`6."},
+       {"40", "0.000117`3."},
+       {"41", "0.067302`5."}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.1]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}]},
+    {"\<\"Rubidium\"\>", GridBox[{
+       {"85", "0.7217`4."},
+       {"87", "0.2783`4."}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.1]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}]},
+    {"\<\"Cesium\"\>", GridBox[{
+       {"133", "1.`3."}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.1]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}]}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{"Lithium", {{6, 0.0759`3.}, {7, 0.9241`4.}}}, {
+    "Sodium", {{23, 1.`3.}}}, {
+    "Potassium", {{39, 0.932581`6.}, {40, 0.000117`3.}, {41, 0.067302`5.}}}, {
+    "Rubidium", {{85, 0.7217`4.}, {87, 0.2783`4.}}}, {
+    "Cesium", {{133, 1.`3.}}}}]]], "Print",
+ CellChangeTimes->{{3.566825753584176*^9, 3.5668257648317957`*^9}, 
+   3.5668258494463444`*^9, 3.566825892018819*^9, {3.5668263649024496`*^9, 
+   3.5668263709864607`*^9}, 3.5668266598441677`*^9, 3.66152844937718*^9, {
+   3.6615284834472275`*^9, 3.661528540777308*^9}, 3.6616060991779203`*^9, {
+   3.661606265138153*^9, 3.6616062900981874`*^9}}],
+
+Cell[BoxData["\<\"\"\>"], "Print",
+ CellChangeTimes->{{3.566825753584176*^9, 3.5668257648317957`*^9}, 
+   3.5668258494463444`*^9, 3.566825892018819*^9, {3.5668263649024496`*^9, 
+   3.5668263709864607`*^9}, 3.5668266598441677`*^9, 3.66152844937718*^9, {
+   3.6615284834472275`*^9, 3.661528540777308*^9}, 3.6616060991779203`*^9, {
+   3.661606265138153*^9, 3.6616062900981874`*^9}}],
+
+Cell[BoxData[
+ StyleBox["\<\"Alkali Metal Ionization Energies (eV)\"\>",
+  StripOnInput->False,
+  FontWeight->Bold,
+  FontSlant->Italic]], "Print",
+ CellChangeTimes->{{3.566825753584176*^9, 3.5668257648317957`*^9}, 
+   3.5668258494463444`*^9, 3.566825892018819*^9, {3.5668263649024496`*^9, 
+   3.5668263709864607`*^9}, 3.5668266598441677`*^9, 3.66152844937718*^9, {
+   3.6615284834472275`*^9, 3.661528540777308*^9}, 3.6616060991779203`*^9, {
+   3.661606265138153*^9, 3.6616062900981874`*^9}}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"Lithium\"\>", 
+     TemplateBox[{
+      "5.39149283288228094178062020550930328607`3.9994212121735693"},
+      "QuantityUnit",
+      DisplayFunction->(TooltipBox[
+        StyleBox[
+         RowBox[{#, "\[InvisibleSpace]", 
+           StyleBox[
+            RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+         ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+      InterpretationFunction->(RowBox[{"Quantity", "[", 
+         RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )]},
+    {"\<\"Sodium\"\>", 
+     TemplateBox[{
+      "5.13860466463482293528418204131394188704`3.9994212121735693"},
+      "QuantityUnit",
+      DisplayFunction->(TooltipBox[
+        StyleBox[
+         RowBox[{#, "\[InvisibleSpace]", 
+           StyleBox[
+            RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+         ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+      InterpretationFunction->(RowBox[{"Quantity", "[", 
+         RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )]},
+    {"\<\"Potassium\"\>", 
+     TemplateBox[{
+      "4.34055593696866447216017635922202271545`3.9994212121735693"},
+      "QuantityUnit",
+      DisplayFunction->(TooltipBox[
+        StyleBox[
+         RowBox[{#, "\[InvisibleSpace]", 
+           StyleBox[
+            RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+         ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+      InterpretationFunction->(RowBox[{"Quantity", "[", 
+         RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )]},
+    {"\<\"Rubidium\"\>", 
+     TemplateBox[{
+      "4.17680048375924494336330246601355098894`3.9994212121735693"},
+      "QuantityUnit",
+      DisplayFunction->(TooltipBox[
+        StyleBox[
+         RowBox[{#, "\[InvisibleSpace]", 
+           StyleBox[
+            RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+         ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+      InterpretationFunction->(RowBox[{"Quantity", "[", 
+         RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )]},
+    {"\<\"Cesium\"\>", 
+     TemplateBox[{
+      "3.89385593485942512461933681509005237316`3.9994212121735693"},
+      "QuantityUnit",
+      DisplayFunction->(TooltipBox[
+        StyleBox[
+         RowBox[{#, "\[InvisibleSpace]", 
+           StyleBox[
+            RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+         ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+      InterpretationFunction->(RowBox[{"Quantity", "[", 
+         RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )]}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Print",
+ CellChangeTimes->{{3.566825753584176*^9, 3.5668257648317957`*^9}, 
+   3.5668258494463444`*^9, 3.566825892018819*^9, {3.5668263649024496`*^9, 
+   3.5668263709864607`*^9}, 3.5668266598441677`*^9, 3.66152844937718*^9, {
+   3.6615284834472275`*^9, 3.661528540777308*^9}, 3.6616060991779203`*^9, {
+   3.661606265138153*^9, 3.6616062900981874`*^9}}]
+}, Open  ]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", " ", 
+  RowBox[{
+   RowBox[{"Tantalum", " ", "work", " ", "function"}], " ", "=", " ", 
+   RowBox[{"4.25", " ", "eV"}]}], " ", "*)"}]], "Input",
+ CellChangeTimes->{{3.566492094848464*^9, 3.5664921135528965`*^9}}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell["Halogens", "Section",
+ CellChangeTimes->{{3.566826576867622*^9, 3.56682658161003*^9}, {
+  3.5668266344941235`*^9, 3.566826636085326*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"halogens", "=", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ElementData", "[", 
+      RowBox[{"\"\<Halogen\>\"", ",", "\"\<Name\>\""}], "]"}], "//", "Most"}],
+     "//", "Most"}]}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"halogens", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"StringJoin", "[", 
+     RowBox[{"Join", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"ToUpperCase", "[", 
+         RowBox[{"First", "[", "#", "]"}], "]"}], "}"}], ",", 
+       RowBox[{"Rest", "[", "#", "]"}]}], "]"}], "]"}], "&"}], "/@", 
+   RowBox[{"Characters", "[", "halogens", "]"}]}]}]}], "Input",
+ CellChangeTimes->{{3.5664917098017235`*^9, 3.5664917104725246`*^9}, {
+  3.5668249230387173`*^9, 3.566824925581522*^9}, {3.566825000414853*^9, 
+  3.566825005344462*^9}, {3.5668255688798513`*^9, 3.5668255768046656`*^9}, {
+  3.566825685427656*^9, 3.5668256985940795`*^9}, {3.566825805844268*^9, 
+  3.566825809884675*^9}, {3.566826006835021*^9, 3.5668260086446238`*^9}, {
+  3.566826109545601*^9, 3.566826123039625*^9}, {3.6615287262075677`*^9, 
+  3.66152873518758*^9}, {3.6615291699907064`*^9, 3.6615291732707114`*^9}, {
+  3.661606325908238*^9, 3.6616063284082413`*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{"\<\"Fluorine\"\>", ",", "\<\"Chlorine\"\>", ",", "\<\"Bromine\"\>",
+    ",", "\<\"Iodine\"\>"}], "}"}]], "Output",
+ CellChangeTimes->{3.5668261248024282`*^9, 3.566826659859768*^9, 
+  3.661528644517453*^9, 3.6615287360775814`*^9, 3.6615291739807124`*^9, 
+  3.661606330688245*^9, 3.661606376028308*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"afinities", "=", 
+  RowBox[{"N", "[", 
+   RowBox[{
+    RowBox[{
+     RowBox[{"ElementData", "[", 
+      RowBox[{"\"\<Halogen\>\"", ",", "\"\<ElectronAffinity\>\""}], "]"}], "//",
+      "Most"}], "//", "Most"}], "]"}]}], "\[IndentingNewLine]", 
+ RowBox[{
+  RowBox[{"afinities", "/=", 
+   RowBox[{
+    RowBox[{"Quantity", "[", "\"\<Avogadro's Number\>\"", "]"}], "/", 
+    RowBox[{"Quantity", "[", "\"\<Moles\>\"", "]"}]}]}], 
+  ";"}], "\[IndentingNewLine]", 
+ RowBox[{"afinities", " ", "=", " ", 
+  RowBox[{
+  "afinities", "~", "UnitConvert", "~", "\"\<Electron Volt\>\""}]}]}], "Input",
+ CellChangeTimes->{{3.5668260883763638`*^9, 3.5668261035863905`*^9}, {
+  3.5668261425396595`*^9, 3.5668261637712965`*^9}, {3.5668262497118473`*^9, 
+  3.566826253580654*^9}, {3.566826288353115*^9, 3.566826309881153*^9}, {
+  3.6615286512074623`*^9, 3.6615286780675*^9}, {3.6615287577776117`*^9, 
+  3.6615287593076143`*^9}, {3.6615291774207172`*^9, 3.661529178910719*^9}}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{"328.`"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", 
+            
+            RowBox[{"\"kJ\"", "\[InvisibleSpace]", "\"/\"", 
+              "\[InvisibleSpace]", "\"mol\""}]}], 
+          "QuantityUnitTraditionalLabel"]}], ShowStringCharacters -> False], 
+      "Unit: kilojoules per mole"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", 
+         FractionBox["\"Kilojoules\"", "\"Moles\""]}], "]"}]& )], ",", 
+   TemplateBox[{"349.`"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", 
+            
+            RowBox[{"\"kJ\"", "\[InvisibleSpace]", "\"/\"", 
+              "\[InvisibleSpace]", "\"mol\""}]}], 
+          "QuantityUnitTraditionalLabel"]}], ShowStringCharacters -> False], 
+      "Unit: kilojoules per mole"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", 
+         FractionBox["\"Kilojoules\"", "\"Moles\""]}], "]"}]& )], ",", 
+   TemplateBox[{"324.6`"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", 
+            
+            RowBox[{"\"kJ\"", "\[InvisibleSpace]", "\"/\"", 
+              "\[InvisibleSpace]", "\"mol\""}]}], 
+          "QuantityUnitTraditionalLabel"]}], ShowStringCharacters -> False], 
+      "Unit: kilojoules per mole"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", 
+         FractionBox["\"Kilojoules\"", "\"Moles\""]}], "]"}]& )], ",", 
+   TemplateBox[{"295.2`"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", 
+            
+            RowBox[{"\"kJ\"", "\[InvisibleSpace]", "\"/\"", 
+              "\[InvisibleSpace]", "\"mol\""}]}], 
+          "QuantityUnitTraditionalLabel"]}], ShowStringCharacters -> False], 
+      "Unit: kilojoules per mole"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", 
+         FractionBox["\"Kilojoules\"", "\"Moles\""]}], "]"}]& )]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.566826104272792*^9, 3.5668261655497*^9, 3.5668262544074554`*^9, 
+   3.5668263105207543`*^9, 3.5668266598753676`*^9, {3.6615286523974643`*^9, 
+   3.661528682217506*^9}, {3.661528740747588*^9, 3.6615287595776143`*^9}, 
+   3.66152917920072*^9, 3.6616063761283083`*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   TemplateBox[{"3.399480294474025`"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+       ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )], ",", 
+   TemplateBox[{"3.6171299474738867`"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+       ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )], ",", 
+   TemplateBox[{"3.364241779226429`"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+       ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )], ",", 
+   TemplateBox[{"3.059532265026623`"},
+    "QuantityUnit",
+    DisplayFunction->(TooltipBox[
+      StyleBox[
+       RowBox[{#, "\[InvisibleSpace]", 
+         StyleBox[
+          RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+       ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+    InterpretationFunction->(RowBox[{"Quantity", "[", 
+       RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )]}], "}"}]], "Output",
+ CellChangeTimes->{
+  3.566826104272792*^9, 3.5668261655497*^9, 3.5668262544074554`*^9, 
+   3.5668263105207543`*^9, 3.5668266598753676`*^9, {3.6615286523974643`*^9, 
+   3.661528682217506*^9}, {3.661528740747588*^9, 3.6615287595776143`*^9}, 
+   3.66152917920072*^9, 3.661606376248308*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"isotopes", "=", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"#", ",", 
+      RowBox[{"ElementData", "[", 
+       RowBox[{"#", ",", "\"\<IsotopeAbundances\>\""}], "]"}]}], "}"}], "&"}],
+    "/@", "halogens"}]}]], "Input",
+ CellChangeTimes->{{3.5668250467625346`*^9, 3.566825081113795*^9}, {
+   3.5668256287995567`*^9, 3.56682564764439*^9}, 3.566826417831743*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{"\<\"Fluorine\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"19", ",", "1.`3."}], "}"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Chlorine\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"35", ",", "0.7578`4."}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"37", ",", "0.2422`4."}], "}"}]}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Bromine\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{"79", ",", "0.5069`4."}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{"81", ",", "0.4931`4."}], "}"}]}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{"\<\"Iodine\"\>", ",", 
+     RowBox[{"{", 
+      RowBox[{"{", 
+       RowBox[{"127", ",", "1.`3."}], "}"}], "}"}]}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.5668250819561963`*^9, 3.5668255825766754`*^9, {3.566825636942771*^9, 
+   3.5668256491887927`*^9}, 3.5668258494463444`*^9, 3.566825892003219*^9, 
+   3.56682642770016*^9, 3.566826659890968*^9, 3.6615288213677006`*^9, 
+   3.66152918656073*^9, 3.6616063762683086`*^9}]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{"Print", "[", 
+  RowBox[{"Style", "[", 
+   RowBox[{
+   "\"\<Halogen Isotopes and Abundances\>\"", ",", "Bold", ",", "Italic"}], 
+   "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"isotopes", "//", "TableForm"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{"Style", "[", 
+   RowBox[{
+   "\"\<Halogen Electron Affinities (eV)\>\"", ",", "Bold", ",", "Italic"}], 
+   "]"}], "]"}], "\[IndentingNewLine]", 
+ RowBox[{"Print", "[", 
+  RowBox[{
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"halogens", ",", "afinities"}], "}"}], "//", "Transpose"}], "//",
+    "TableForm"}], "]"}], "\n"}], "Input",
+ CellChangeTimes->{{3.5668250981178246`*^9, 3.566825103858635*^9}, {
+   3.566825654586402*^9, 3.566825663681218*^9}, {3.566825722009721*^9, 
+   3.5668257806502237`*^9}, {3.566826344560014*^9, 3.566826370050459*^9}, {
+   3.566826441272184*^9, 3.56682647894625*^9}, {3.6615288954878044`*^9, 
+   3.66152891363783*^9}, 3.661606372158303*^9}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ StyleBox["\<\"Halogen Isotopes and Abundances\"\>",
+  StripOnInput->False,
+  FontWeight->Bold,
+  FontSlant->Italic]], "Print",
+ CellChangeTimes->{3.5668264838134584`*^9, 3.5668266599065676`*^9, 
+  3.6615288706277695`*^9, 3.6615289153778324`*^9, 3.661529197330745*^9, 
+  3.6616063762783084`*^9}],
+
+Cell[BoxData[
+ InterpretationBox[GridBox[{
+    {"\<\"Fluorine\"\>", GridBox[{
+       {"19", "1.`3."}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.1]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}]},
+    {"\<\"Chlorine\"\>", GridBox[{
+       {"35", "0.7578`4."},
+       {"37", "0.2422`4."}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.1]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}]},
+    {"\<\"Bromine\"\>", GridBox[{
+       {"79", "0.5069`4."},
+       {"81", "0.4931`4."}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.1]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}]},
+    {"\<\"Iodine\"\>", GridBox[{
+       {"127", "1.`3."}
+      },
+      GridBoxAlignment->{
+       "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+        "RowsIndexed" -> {}},
+      GridBoxSpacings->{"Columns" -> {
+          Offset[0.27999999999999997`], {
+           Offset[0.7]}, 
+          Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+          Offset[0.2], {
+           Offset[0.1]}, 
+          Offset[0.2]}, "RowsIndexed" -> {}}]}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  TableForm[{{"Fluorine", {{19, 1.`3.}}}, {
+    "Chlorine", {{35, 0.7578`4.}, {37, 0.2422`4.}}}, {
+    "Bromine", {{79, 0.5069`4.}, {81, 0.4931`4.}}}, {
+    "Iodine", {{127, 1.`3.}}}}]]], "Print",
+ CellChangeTimes->{3.5668264838134584`*^9, 3.5668266599065676`*^9, 
+  3.6615288706277695`*^9, 3.6615289153778324`*^9, 3.661529197330745*^9, 
+  3.6616063762783084`*^9}],
+
+Cell[BoxData["\<\"\"\>"], "Print",
+ CellChangeTimes->{3.5668264838134584`*^9, 3.5668266599065676`*^9, 
+  3.6615288706277695`*^9, 3.6615289153778324`*^9, 3.661529197330745*^9, 
+  3.6616063762783084`*^9}],
+
+Cell[BoxData[
+ StyleBox["\<\"Halogen Electron Affinities (eV)\"\>",
+  StripOnInput->False,
+  FontWeight->Bold,
+  FontSlant->Italic]], "Print",
+ CellChangeTimes->{3.5668264838134584`*^9, 3.5668266599065676`*^9, 
+  3.6615288706277695`*^9, 3.6615289153778324`*^9, 3.661529197330745*^9, 
+  3.6616063762783084`*^9}],
+
+Cell[BoxData[
+ TagBox[GridBox[{
+    {"\<\"Fluorine\"\>", 
+     TemplateBox[{"3.399480294474025`"},
+      "QuantityUnit",
+      DisplayFunction->(TooltipBox[
+        StyleBox[
+         RowBox[{#, "\[InvisibleSpace]", 
+           StyleBox[
+            RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+         ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+      InterpretationFunction->(RowBox[{"Quantity", "[", 
+         RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )]},
+    {"\<\"Chlorine\"\>", 
+     TemplateBox[{"3.6171299474738867`"},
+      "QuantityUnit",
+      DisplayFunction->(TooltipBox[
+        StyleBox[
+         RowBox[{#, "\[InvisibleSpace]", 
+           StyleBox[
+            RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+         ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+      InterpretationFunction->(RowBox[{"Quantity", "[", 
+         RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )]},
+    {"\<\"Bromine\"\>", 
+     TemplateBox[{"3.364241779226429`"},
+      "QuantityUnit",
+      DisplayFunction->(TooltipBox[
+        StyleBox[
+         RowBox[{#, "\[InvisibleSpace]", 
+           StyleBox[
+            RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+         ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+      InterpretationFunction->(RowBox[{"Quantity", "[", 
+         RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )]},
+    {"\<\"Iodine\"\>", 
+     TemplateBox[{"3.059532265026623`"},
+      "QuantityUnit",
+      DisplayFunction->(TooltipBox[
+        StyleBox[
+         RowBox[{#, "\[InvisibleSpace]", 
+           StyleBox[
+            RowBox[{" ", "\"eV\""}], "QuantityUnitTraditionalLabel"]}], 
+         ShowStringCharacters -> False], "Unit: electronvolts"]& ),
+      InterpretationFunction->(RowBox[{"Quantity", "[", 
+         RowBox[{#, ",", "\"Electronvolts\""}], "]"}]& )]}
+   },
+   GridBoxAlignment->{
+    "Columns" -> {{Left}}, "ColumnsIndexed" -> {}, "Rows" -> {{Baseline}}, 
+     "RowsIndexed" -> {}},
+   GridBoxSpacings->{"Columns" -> {
+       Offset[0.27999999999999997`], {
+        Offset[2.0999999999999996`]}, 
+       Offset[0.27999999999999997`]}, "ColumnsIndexed" -> {}, "Rows" -> {
+       Offset[0.2], {
+        Offset[0.4]}, 
+       Offset[0.2]}, "RowsIndexed" -> {}}],
+  Function[BoxForm`e$, 
+   TableForm[BoxForm`e$]]]], "Print",
+ CellChangeTimes->{3.5668264838134584`*^9, 3.5668266599065676`*^9, 
+  3.6615288706277695`*^9, 3.6615289153778324`*^9, 3.661529197330745*^9, 
+  3.661606376288308*^9}]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+},
+WindowSize->{848, 783},
+WindowMargins->{{413, Automatic}, {Automatic, 61}},
+PrivateNotebookOptions->{"VersionedStylesheet"->{"Default.nb"[8.] -> False}},
+FrontEndVersion->"10.0 for Microsoft Windows (64-bit) (December 4, 2014)",
+StyleDefinitions->"Default.nb"
+]
+(* End of Notebook Content *)
+
+(* Internal cache information *)
+(*CellTagsOutline
+CellTagsIndex->{}
+*)
+(*CellTagsIndex
+CellTagsIndex->{}
+*)
+(*NotebookFileOutline
+Notebook[{
+Cell[CellGroupData[{
+Cell[579, 22, 145, 1, 56, "Subtitle"],
+Cell[727, 25, 1284, 28, 192, "Input",
+ InitializationCell->True],
+Cell[CellGroupData[{
+Cell[2036, 57, 215, 4, 49, "Subsection"],
+Cell[CellGroupData[{
+Cell[2276, 65, 701, 12, 52, "Input"],
+Cell[2980, 79, 814, 17, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[3831, 101, 377, 7, 31, "Input"],
+Cell[4211, 110, 531, 13, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[4779, 128, 495, 10, 31, "Input"],
+Cell[5277, 140, 574, 13, 31, "Output"]
+}, Open  ]]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[5900, 159, 97, 1, 70, "Section"],
+Cell[CellGroupData[{
+Cell[6022, 164, 1010, 23, 52, "Input"],
+Cell[7035, 189, 598, 10, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[7670, 204, 1036, 23, 72, "Input"],
+Cell[8709, 229, 3562, 87, 31, "Output"],
+Cell[12274, 318, 3014, 62, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[15325, 385, 372, 10, 31, "Input"],
+Cell[15700, 397, 1527, 44, 72, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[17264, 446, 1080, 24, 132, "Input"],
+Cell[CellGroupData[{
+Cell[18369, 474, 491, 9, 24, "Print"],
+Cell[18863, 485, 3617, 91, 127, "Print"],
+Cell[22483, 578, 379, 5, 23, "Print"],
+Cell[22865, 585, 492, 9, 24, "Print"],
+Cell[23360, 596, 3402, 79, 80, "Print"]
+}, Open  ]]
+}, Open  ]],
+Cell[26789, 679, 241, 5, 31, "Input"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[27067, 689, 143, 2, 70, "Section"],
+Cell[CellGroupData[{
+Cell[27235, 695, 1191, 26, 52, "Input"],
+Cell[28429, 723, 340, 6, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[28806, 734, 981, 21, 72, "Input"],
+Cell[29790, 757, 2636, 68, 31, "Output"],
+Cell[32429, 827, 2034, 47, 31, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[34500, 879, 396, 10, 31, "Input"],
+Cell[34899, 891, 1181, 34, 52, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[36117, 930, 1050, 24, 165, "Input"],
+Cell[CellGroupData[{
+Cell[37192, 958, 309, 7, 24, "Print"],
+Cell[37504, 967, 2817, 73, 89, "Print"],
+Cell[40324, 1042, 202, 3, 23, "Print"],
+Cell[40529, 1047, 310, 7, 24, "Print"],
+Cell[40842, 1056, 2521, 61, 65, "Print"]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}, Open  ]]
+}
+]
+*)
+
+(* End of internal cache information *)
